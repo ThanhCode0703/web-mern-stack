@@ -29,7 +29,7 @@ function HomePage() {
         <CardComponent />
         <CardComponent />
       </div>
-      <div>
+      <div className="wrapper-button-component">
         <ButtonComponent
           className="button-component"
           textButton="Xem Thêm"

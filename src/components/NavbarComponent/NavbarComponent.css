@@ -1,22 +1,22 @@
 
 .choose{
-    padding: 0 120px;
+    
     color: rgb(56, 56, 61);
     font-size: 12px;
     font-weight: 400;
 }
 .lable-text {
-    padding: 0 120px;
+   
     color: rgb(56, 56, 61);
 }
 .feedback-star {
-    padding: 0 120px;
+   
     font-size: 12px;
     gap: 4px;
 }
 .feedback-price{
     padding: 4px;
-    margin-left: 120px;
+    /* margin-left: 120px; */
     border-radius: 10px;
     background-color: rgb(238,238,238);
     width: fit-content;

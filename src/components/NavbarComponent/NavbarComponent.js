@@ -17,7 +17,7 @@ function NavbarComponent() {
           <Checkbox.Group
             style={{
               width: "100%",
-              padding: "0 120px",
+              // padding: "0 120px",
               flexDirection: "column",
             }}
             onChange={onChange}
