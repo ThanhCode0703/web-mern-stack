@@ -1,0 +1,41 @@
+.wrapper-type-product-homepage {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    justify-content: flex-start;
+    border-bottom: 1px solid red;
+    margin: 0 120px;
+    height: 44px;
+}
+.container-homepage {
+    height: 2000px;
+    background-color: #efefef;
+    
+}
+.wrapper-container-homepage{
+    padding:0 120px;
+}
+.wrapper-card-component{
+    padding: 0 120px;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.button-component{
+    margin: 20px;
+    margin-left: 120px;
+    border: 1px solid rgb(11,116,229);
+    color: rgb(11,116,229);
+    width: 240px;
+    height: 38px;
+    border-radius: 4px;
+    &:hover {
+        color: #fff;
+        background: rgb(13,92,182);
+        span {
+            color: #fff;
+        }
+    }
+}

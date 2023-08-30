@@ -1,0 +1,40 @@
+.card-component {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    
+}
+.logo-sp{
+    width: 72px;
+    height: 20px;
+    position: absolute;
+}
+.type{
+    font-weight: 400px;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgb(56, 56, 61);
+}
+.description{
+    margin: 8px 0 4px;
+    font-size: 11px;
+    color: rgb(128, 128, 137);
+}
+.star{
+    font-size: 10px;
+    color: yellow;
+}
+.cost{
+    margin: 8px 0 4px;
+    font-size: 16px;
+    line-height: 150%;
+    font-weight: 500;
+    color: rgb(255, 66, 78);
+}
+.discount{
+    font-size: 12px;
+        line-height: 150%;
+        font-weight: 500;
+        color: rgb(255, 66, 78);
+}
