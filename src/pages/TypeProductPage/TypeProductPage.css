@@ -1,10 +1,23 @@
-.wrapper-navbar-card{
-    padding: 0 120px;
-    background: #efefef;
+.container-type-product-page{
+    background-color: #ccc;
+    /* background: #efefef; */
     height: 2000px;
-    
+
+}
+.wrapper-type-product-page{
+    margin: 0 120px;
 }
 .card-type{
+    margin-top: 20px;
+    border-radius: 10px;
     background-color: #fff;
-    padding-left: 10px;
+    height: fit-content;
+}
+.wrapper-type-card-component{
+    margin: 10px;
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
 }

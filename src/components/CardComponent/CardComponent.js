@@ -1,4 +1,4 @@
-import { Card, Image } from "antd";
+import { Card } from "antd";
 import React from "react";
 import "./CardComponent.css";
 import { StarFilled } from "@ant-design/icons";
@@ -17,12 +17,9 @@ function CardComponent() {
           />
         }
       >
-        <div className="type">
-          <span className="logo-sp">
-            <Image src={logo} preview={false} />
-          </span>
-          Iphone
-        </div>
+        <img className="logo-card-component" src={logo} alt="logo" />
+        <div>Iphone</div>
+
         <div className="description">
           {" "}
           <span>

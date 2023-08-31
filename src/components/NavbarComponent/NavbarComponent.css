@@ -1,4 +1,7 @@
-
+.container-navbar{
+    padding: 10px;
+    height: fit-content;
+}
 .choose{
     
     color: rgb(56, 56, 61);
@@ -16,9 +19,9 @@
 }
 .feedback-price{
     padding: 4px;
-    /* margin-left: 120px; */
     border-radius: 10px;
     background-color: rgb(238,238,238);
     width: fit-content;
     color: rgb(56, 56, 61);
+    margin: 3px;
 }

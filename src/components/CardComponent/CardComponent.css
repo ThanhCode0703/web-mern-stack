@@ -1,20 +1,15 @@
 .card-component {
-    margin-top: 20px;
     display: flex;
     align-items: center;
     gap: 20px;
-    
 }
-.logo-sp{
-    width: 72px;
-    height: 20px;
+.logo-card-component{
+    width: 68px;
+    height: 16px;
     position: absolute;
-}
-.type{
-    font-weight: 400px;
-    font-size: 12px;
-    line-height: 16px;
-    color: rgb(56, 56, 61);
+    top:0;
+    left: 0;
+    border-top-left-radius: 8px;
 }
 .description{
     margin: 8px 0 4px;

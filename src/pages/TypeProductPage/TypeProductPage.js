@@ -5,15 +5,23 @@ import React from "react";
 import "./TypeProductPage.css";
 function TypeProductPage() {
   return (
-    <div className="wrapper-navbar-card">
-      <Row>
-        <Col className="card-type" span={8}>
-          <NavbarComponent />
-        </Col>
-        <Col span={16}>
-          <CardComponent />
-        </Col>
-      </Row>
+    <div className="container-type-product-page">
+      <div className="wrapper-type-product-page">
+        <Row>
+          <Col className="card-type" span={4}>
+            <NavbarComponent />
+          </Col>
+          <Col span={20}>
+            <div className="wrapper-type-card-component">
+              <CardComponent />
+              <CardComponent />
+              <CardComponent />
+              <CardComponent />
+              <CardComponent />
+            </div>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
