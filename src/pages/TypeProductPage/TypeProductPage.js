@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Col, Pagination, Row } from "antd";
 import CardComponent from "../../components/CardComponent/CardComponent";
 import NavbarComponent from "../../components/NavbarComponent/NavbarComponent";
 import React from "react";
@@ -21,6 +21,9 @@ function TypeProductPage() {
             </div>
           </Col>
         </Row>
+        <div className="type-product-pagination">
+          <Pagination defaultCurrent={1} total={50} />
+        </div>
       </div>
     </div>
   );

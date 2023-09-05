@@ -1,4 +1,4 @@
-import { Col } from "antd";
+import { Badge, Col } from "antd";
 import {
   WrapperHeader,
   WrapperHeaderAccout,
@@ -10,9 +10,8 @@ import {
   CaretDownOutlined,
   ShoppingCartOutlined,
 } from "@ant-design/icons";
-import "./HeaderComponent.css";
 import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
-//
+
 function HeaderComponent() {
   return (
     <div>
@@ -39,9 +38,11 @@ function HeaderComponent() {
           </WrapperHeaderAccout>
           <div>
             <div>
-              <ShoppingCartOutlined
-                style={{ fontSize: "30px", color: "#fff" }}
-              />
+              <Badge count={4}>
+                <ShoppingCartOutlined
+                  style={{ fontSize: "30px", color: "#fff" }}
+                />
+              </Badge>
               <WrapperTextHeaderSmall>Giỏ Hàng</WrapperTextHeaderSmall>
             </div>
           </div>

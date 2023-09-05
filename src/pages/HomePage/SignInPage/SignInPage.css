@@ -1,0 +1,57 @@
+.container-signin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.53);
+    height: 100vh;
+}
+.button-login{
+    cursor: not-allowed;
+    border-color: #d9d9d9;
+    color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.04);
+    box-shadow: none;
+}
+.sign-in-with-email{
+    margin-top: 10px;
+    color:  rgb(13, 92, 182);
+    font-size: 13px;
+}
+.wrapper-signin{
+   background-color: rgb(248, 248, 248);
+    width: 800px;
+    height: 445px;
+    border-radius: 6px;
+
+}
+.wrapper-container-left{
+    width: 500px;
+    padding: 40px 45px 24px;
+    background: rgb(255, 255, 255);
+    border-radius: 20px 0px 0px 20px;
+}
+.wrapper-container-right{
+    background: linear-gradient(136deg, rgb(240, 248, 255) -1%, rgb(219, 238, 255) 85%);
+    width: 300px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px 20px 20px 0px;
+}
+.image-login{
+        max-width: 100%;
+}
+.Content-login{
+    margin: 0px 0px 5px;
+    color: rgb(11, 116, 229);
+    font-size: 17px;
+    font-weight: 500;
+}
+.Content-login1{
+    font-size: 13px;
+    color: rgb(11, 116, 229);
+    font-weight: 500;
+}

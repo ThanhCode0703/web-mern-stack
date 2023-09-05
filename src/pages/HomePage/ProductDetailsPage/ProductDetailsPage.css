@@ -1,0 +1,10 @@
+.container-product-details-page{
+    background-color: #efefef;
+    height: 1000px;
+}
+.wrapper-product-details-component{
+    padding-top: 16px;
+    margin: 0 120px;
+    background-color: #fff;
+    height: fit-content;
+}
