@@ -16,6 +16,7 @@
     margin-top: 10px;
     color:  rgb(13, 92, 182);
     font-size: 13px;
+    cursor: pointer;
 }
 .wrapper-signin{
    background-color: rgb(248, 248, 248);
@@ -54,4 +55,88 @@
     font-size: 13px;
     color: rgb(11, 116, 229);
     font-weight: 500;
+}
+.btn-sign-in{
+    width: 100%;
+    border-radius: 4px;
+    outline: none;
+    margin: 30px 0px 10px;
+    font-size: 16px;
+    background: rgb(255, 66, 78);
+    color: rgb(255, 255, 255);
+    border: none;
+    &:hover{
+        opacity: 0.8;
+        color: #fff !important;
+    }
+}
+.back-to-sign-in{
+     width: 100%;
+    border-radius: 4px;
+    outline: none;
+    font-size: 16px;
+    color: #000;
+    
+    &:hover{
+       color: rgb(11, 116, 229); ;
+        
+    }
+}
+.footer-left-sign-in{
+    text-align: center;
+    margin: 80px 0px 0px;
+}
+.sign-in-with-email{
+    margin: 10px 0px 0px;
+    text-align: center;
+    font-size: 14px;
+    color: rgb(13, 92, 182);
+    cursor: pointer;
+}
+
+.social-heading-sign-in-page{
+    display: inline-block;
+    position: relative;
+    font-size: 15px;
+    color: rgb(120, 120, 120);
+    background: rgb(255, 255, 255);
+    padding: 0px 20px;
+    z-index: 2;
+}
+.social-list-item-sign-in{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    margin: 0px 0px 10px;
+    list-style: none;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+
+    /* ul edit */
+    margin-block-start: 1em;
+}
+.social-item-sign-in{
+    margin: 0px 10px;
+}
+.image-social-item-sign-in{
+    width: 50px;
+    &:hover{
+        opacity: 0.8;
+        cursor: pointer;
+    }
+}
+.hide-show-confirm-password,
+.hide-show-password{
+    position: relative;
+}
+.hide-show-confirm-password-span,
+.hide-show-password-span{
+    z-index: 10;
+    position: absolute;
+    font-size: 16px;
+    top: 0px;
+    right: 8px;
+   cursor: pointer;
 }

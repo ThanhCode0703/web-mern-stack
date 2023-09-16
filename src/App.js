@@ -12,7 +12,7 @@ function App() {
     return res.data;
   };
   const query = useQuery({ queryKey: ["todos"], queryFn: test });
-  console.log("query", query);
+
   // useEffect(() => {
   //   test();
   // }, []);

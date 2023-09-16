@@ -1,0 +1,42 @@
+.login-user{
+    font-size: 12px;
+    cursor: pointer;
+}
+.container-header{
+    display: flex;
+    gap: 30px;
+    align-items: center
+}
+.fa-cart-shopping{
+    font-size: 25px;
+    color: #fff;
+}
+.fa-user{
+    font-size: 30px;
+}
+.fa-caret-down{
+    font-size: 20px;
+    gap: 30px;
+}
+.icon-fa-caret-down{
+    display: flex;
+    gap: 10px;
+}
+.btn-account{
+    display: flex;
+    position: relative;
+    border: none;
+    
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    &:hover{
+        opacity: 0.8;
+        
+    }
+}

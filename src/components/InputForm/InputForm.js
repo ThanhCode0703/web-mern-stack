@@ -1,13 +1,18 @@
-import React from "react";
+import { Input } from "antd";
 import "./InputForm.css";
-function InputForm() {
+
+function InputForm(props) {
+  const { placeholder, ...rests } = props;
   return (
-    <div className="container-input">
-      <input type="text" className="form-control" placeholder="Email" />
-      <input type="text" className="form-control" placeholder="Mật Khẩu" />
-      <button type="button" className="btn btn-lg button-login">
-        Đăng nhập
-      </button>
+    <div className="input-form-wrapper">
+      <Input
+        className="input-sign-in-form"
+        autoComplete="new-password"
+        placeholder={placeholder}
+        valueinput={props.value}
+        {...rests}
+        onChange={props.onChange}
+      />
     </div>
   );
 }

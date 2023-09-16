@@ -1,18 +1,20 @@
 import { Badge, Col } from "antd";
+import "./HeaderComponent.css";
 import {
   WrapperHeader,
-  WrapperHeaderAccout,
+  WrapperHeaderAccount,
   WrapperTextHeader,
   WrapperTextHeaderSmall,
 } from "./style";
-import {
-  UserOutlined,
-  CaretDownOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
+
 import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
+import { useNavigate } from "react-router-dom";
 
 function HeaderComponent() {
+  const navigate = useNavigate();
+  const handleNavigateLogin = () => {
+    navigate("/sign-in");
+  };
   return (
     <div>
       <WrapperHeader gutter={20}>
@@ -26,22 +28,16 @@ function HeaderComponent() {
           span={6}
           style={{ display: "flex", gap: "30px", alignItems: "center" }}
         >
-          <WrapperHeaderAccout>
-            <UserOutlined style={{ fontSize: "30px" }} />
-            <div>
-              <span style={{ fontSize: "12px" }}>Đăng nhập/ Đăng kí</span>
-              <div>
-                <span style={{ fontSize: "12px" }}>Tài khoăn</span>
-                <CaretDownOutlined />
-              </div>
-            </div>
-          </WrapperHeaderAccout>
+          <WrapperHeaderAccount onClick={handleNavigateLogin}>
+            <button type="button" className="btn-account">
+              <i className="fa-regular fa-user" />
+              &nbsp;Tài khoản
+            </button>
+          </WrapperHeaderAccount>
           <div>
-            <div>
+            <div className="icon-shopping">
               <Badge count={4}>
-                <ShoppingCartOutlined
-                  style={{ fontSize: "30px", color: "#fff" }}
-                />
+                <i className="fa-solid fa-cart-shopping"></i>
               </Badge>
               <WrapperTextHeaderSmall>Giỏ Hàng</WrapperTextHeaderSmall>
             </div>
