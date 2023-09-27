@@ -1,0 +1,96 @@
+.container-profile-product{
+    width: 1270px;
+    margin: 71px auto 0px auto;
+    padding: 10px 120px;
+}
+.ant-upload-list-item-container{
+    display: none;
+}
+.profile-product-text-h1{
+    color: black;
+    font-size: 20px;
+    margin: 4px 0;
+}
+
+/* content-profile-user */
+.wrapper-content-profile-product{
+    display: flex; 
+    flex-direction: column;
+    border: 1px solid #ccc;
+    width: 700px;
+    margin: 0 auto;
+    padding: 16px;
+    border-radius: 10px;
+}
+/* label cho các input */
+.label-profile-product{
+    color: #000;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 600;
+    width: 120px;
+}
+/* input */
+.wrapper-input-profile-product{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.input-profile-product{
+    width: 500px;
+}
+/* user avatar */
+.product-avatar-profile-product{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.ant-upload-list-item-info{
+    display: none;
+}
+.ant-upload.ant-upload-select.ant-upload-select-piture-card{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+.product-management-admin-container{
+    font-size: 14px;
+}
+/* Form */
+.create-product-form{
+    align-items: center;
+    
+}
+/* chức năng */
+.btn-product-admin-management{
+    margin-top: 5px;
+    height: 50px;
+    border-style: solid;
+    font-weight: 600;
+    font-size: 16px;
+}
+.btn-product-admin-management.add{
+    color: #32de84;
+}
+/* bảng thống kê user */
+.table-content-management-product{
+    margin-top: 20px;
+}
+/* image product */
+.product-image-management{
+     height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.btn-submit-create-product{
+    margin: auto;
+}
+.table-content-management-product{
+    display: flex;
+    
+}

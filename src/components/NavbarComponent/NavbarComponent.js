@@ -7,9 +7,9 @@ function NavbarComponent() {
   const renderContent = (type, options) => {
     switch (type) {
       case "text":
-        return options.map((option, index) => (
+        return options.map((option1, index) => (
           <div key={index}>
-            <h1 className="choose">{option}</h1>
+            <h1 className="choose">{option1}</h1>
           </div>
         ));
       case "checkbox":
@@ -21,9 +21,9 @@ function NavbarComponent() {
             }}
             onChange={onChange}
           >
-            {options.map((option, index) => (
+            {options.map((option2, index) => (
               <div key={index}>
-                <Checkbox value={option.value}>{option.label}</Checkbox>
+                <Checkbox value={option2.value}>{option2.label}</Checkbox>
               </div>
             ))}
           </Checkbox.Group>

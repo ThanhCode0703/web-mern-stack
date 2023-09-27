@@ -3,7 +3,19 @@ import React from "react";
 import "./CardComponent.css";
 import { StarFilled } from "@ant-design/icons";
 import logo from "../../assets/images/logo.png";
-function CardComponent() {
+function CardComponent(props) {
+  const {
+    countInStock,
+    description,
+    discount,
+    image,
+    name,
+    price,
+    rating,
+    type,
+    selled,
+  } = props;
+
   return (
     <div className="card-component">
       <Card
@@ -18,17 +30,18 @@ function CardComponent() {
         }
       >
         <img className="logo-card-component" src={logo} alt="logo" />
-        <div>Iphone</div>
+        <div>{name}</div>
 
         <div className="description">
           {" "}
           <span>
-            <span>4.5</span>
+            <span>{rating}</span>
             <StarFilled className="star" />
           </span>
-          <span> | Đã Bán 1000+</span>
+          <span> | Đã Bán {selled || 1000}+</span>
           <div className="cost">
-            16.090.000 ₫<span className="discount"> -25% </span>
+            {price}
+            <span className="discount">{discount || 5}%</span>
           </div>
         </div>
       </Card>

@@ -26,10 +26,12 @@
     line-height: 150%;
     font-weight: 500;
     color: rgb(255, 66, 78);
+    gap: 20px;
 }
 .discount{
     font-size: 12px;
         line-height: 150%;
         font-weight: 500;
         color: rgb(255, 66, 78);
+       margin: 20px;
 }

@@ -6,12 +6,20 @@ import TypeProductPage from "../pages/TypeProductPage/TypeProductPage";
 import SignInPage from "../pages/HomePage/SignInPage/SignInPage";
 import SignUpPage from "../pages/HomePage/SignIUpPage/SignUpPage";
 import ProductDetailsPage from "../pages/HomePage/ProductDetailsPage/ProductDetailsPage";
+import ProfilePage from "../pages/Profile/ProfilePage";
+import AdminPage from "../pages/AdminPage/AdminPage";
 export const routes = [
   {
     path: "/",
     page: HomePage,
     isShowHeader: true,
   },
+
+  {
+    path: `*`,
+    page: NotFoundPage,
+  },
+
   {
     path: "/order",
     page: OrderPage,
@@ -23,7 +31,7 @@ export const routes = [
     isShowHeader: true,
   },
   {
-    path: "/:type",
+    path: "product/:type",
     page: TypeProductPage,
     isShowHeader: true,
   },
@@ -43,7 +51,16 @@ export const routes = [
     isShowHeader: true,
   },
   {
-    path: "*",
-    page: NotFoundPage,
+    path: "/system/admin",
+    page: AdminPage,
+    isShowHeader: true,
+    isPrivate: true,
+  },
+
+  {
+    path: "/profile-user",
+    page: ProfilePage,
+    isShowHeader: true,
+    isPrivate: true,
   },
 ];

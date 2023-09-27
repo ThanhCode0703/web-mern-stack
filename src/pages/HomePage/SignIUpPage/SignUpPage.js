@@ -1,9 +1,9 @@
 import InputForm from "../../../components/InputForm/InputForm";
 import React, { useEffect, useState } from "react";
 import imglogin from "../../../assets/images/logo-login.png";
-import { Form, Image, message } from "antd";
+import { Form, Image } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { signupUser } from "../../../service/UserService";
+import * as UserService from "../../../service/UserService";
 import {
   RollbackOutlined,
   EyeInvisibleFilled,
@@ -13,24 +13,28 @@ import { UserMutationHook } from "../../../hook/UseMutationHook";
 import ButtonComponent from "../../../components/ButtonComponent/ButtonComponent";
 import "../SignInPage/SignInPage.css";
 import socialItem from "../../../assets/images/socail-item/index";
+import Loading from "../../../loading/loading";
+import * as message from "../../../message/message";
 function SignUpPage() {
   //lịch sử
   const navigate = useNavigate();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   //đăng ký tài khoản
-  const mutation = UserMutationHook((data) => signupUser(data));
-  const { isSuccess } = mutation;
+  const mutation = UserMutationHook((data) => UserService.signupUser(data));
+  const { data, isLoading, isSuccess, isError } = mutation;
 
   useEffect(() => {
-    if (isSuccess) {
-      message.success();
-      navigate("/sign-in");
+    if (data) {
+      if (data.status === "OK" && isSuccess) {
+        message.success();
+        navigate("/sign-in");
+      }
+    } else if (isError) {
+      message.error();
     }
-    //  else if (isError) {
-    //   message.error();
     // }
-  });
+  }, [isSuccess, data, isError]);
   //  [isSuccess, isError]);
 
   //xử lý dữ liệu trong form
@@ -129,18 +133,20 @@ function SignUpPage() {
               onChange={(e) => handleOnchangePhoneNumber(e)}
             />
           </Form>
-          <ButtonComponent
-            disabled={
-              !email.length ||
-              !password.length ||
-              !confirmPassword.length ||
-              !name.length ||
-              !phone.length
-            }
-            onClick={handleSignUp}
-            className="btn-sign-in"
-            textButton="Đăng ký"
-          />
+          <Loading isLoading={isLoading}>
+            <ButtonComponent
+              disabled={
+                !email.length ||
+                !password.length ||
+                !confirmPassword.length ||
+                !name.length ||
+                !phone.length
+              }
+              onClick={handleSignUp}
+              className="btn-sign-in"
+              textButton="Đăng ký"
+            />
+          </Loading>
           <Link to="/sign-in">
             <ButtonComponent
               className="back-to-sign-in"

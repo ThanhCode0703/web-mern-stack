@@ -1,16 +1,18 @@
 import axios from "axios";
 
 export const getAllProduct = async (search, limit) => {
+  // limit = 6;
   let res = {};
   if (search?.length > 0) {
     res = await axios.get(
-      `${process.env.REACT_APP_API_KEY}product/detail-all-product?filter=name&filter=${search}&limit=${limit}`
+      `${process.env.REACT_APP_API_KEY}product/getAll?filter=name&filter=${search}&limit=${limit}`
     );
   } else {
     res = await axios.get(
-      `${process.env.REACT_APP_API_KEY}product/detail-all-product?limit=${limit}`
+      `${process.env.REACT_APP_API_KEY}product/getAll?limit=${limit}`
     );
   }
+
   return res.data;
 };
 

@@ -2,11 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./SignInPage.css";
 import InputForm from "../../../components/InputForm/InputForm";
 import imglogin from "../../../assets/images/logo-login.png";
-import { Form, Image, message } from "antd";
+import { Form, Image } from "antd";
 import ButtonComponent from "../../../components/ButtonComponent/ButtonComponent";
 import { useNavigate } from "react-router-dom";
 import { UserMutationHook } from "../../../hook/UseMutationHook";
-import { loginUser } from "../../../service/UserService";
+import * as UserService from "../../../service/UserService";
+import Loading from "../../../loading/loading";
+import * as message from "../../../message/message";
+import jwt_decode from "jwt-decode";
+import { useDispatch } from "react-redux";
+import { updateUser } from "../../../redux/slides/userSlide";
 function SignInPage() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -14,11 +19,13 @@ function SignInPage() {
     navigate("/sign-up");
   };
   //đăng nhập tài khoản
-  const mutation = UserMutationHook((data) => loginUser(data));
-  const { isSuccess } = mutation;
+  const mutation = UserMutationHook((data) => UserService.loginUser(data));
+  const { data, isLoading, isSuccess } = mutation;
+
   const [email, setEmail] = useState("");
   //password
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
   const handleOnChangeEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -30,12 +37,25 @@ function SignInPage() {
   const handleSignin = () => {
     mutation.mutate({ email, password });
   };
-  //  useEffect(()=>{
-  //   if(isSuccess){
-  //     message.success,
-  //     navigate('/Ho')
-  //   }
-  //  })
+
+  useEffect(() => {
+    if (isSuccess) {
+      message.success();
+      navigate("/");
+      localStorage.setItem("access_token", JSON.stringify(data?.access_token));
+      if (data?.access_token) {
+        const decoded = jwt_decode(data?.access_token);
+
+        if (decoded?.id) {
+          handleGetDetailsUser(decoded?.id, data?.access_token);
+        }
+      }
+    }
+  }, [isSuccess]);
+  const handleGetDetailsUser = async (id, token) => {
+    const res = await UserService.getDetailUser(id, token);
+    dispatch(updateUser({ ...res?.data, access_token: token }));
+  };
   return (
     <div className="container-signin">
       <div className="row wrapper-signin">
@@ -82,12 +102,14 @@ function SignInPage() {
                 />
               </Form.Item>
             </div>
-            <ButtonComponent
-              disabled={!email.length || !password.length}
-              className="btn-sign-in"
-              textButton="Đăng nhập"
-              onClick={handleSignin}
-            />
+            <Loading isLoading={isLoading}>
+              <ButtonComponent
+                disabled={!email.length || !password.length}
+                className="btn-sign-in"
+                textButton="Đăng nhập"
+                onClick={handleSignin}
+              />
+            </Loading>
           </Form>
           <p className="sign-in-with-email">Quên mật khẩu</p>
           <p>

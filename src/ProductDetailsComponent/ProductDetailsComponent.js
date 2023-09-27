@@ -85,7 +85,7 @@ function ProductDetailsComponent() {
                   <span>580.000₫</span>
                   <div className="sale">
                     <span className="list-sale">686.000₫</span>
-                    <span className="discount">-16%</span>
+                    <span className="discount-product-details">-16%</span>
                   </div>
                 </div>
               </div>

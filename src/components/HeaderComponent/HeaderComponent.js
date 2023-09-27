@@ -1,4 +1,4 @@
-import { Badge, Col } from "antd";
+import { Badge, Button, Col, Popover } from "antd";
 import "./HeaderComponent.css";
 import {
   WrapperHeader,
@@ -9,12 +9,67 @@ import {
 
 import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import * as UserService from "../../service/UserService";
+import { useDispatch } from "react-redux";
+import { resetUser } from "../../redux/slides/userSlide";
+import { useEffect, useState } from "react";
+import Loading from "../../loading/loading";
 
 function HeaderComponent() {
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+
+  const [userName, setUserName] = useState("");
+  const [loading, setLoading] = useState(false);
   const handleNavigateLogin = () => {
     navigate("/sign-in");
   };
+  const dispatch = useDispatch();
+
+  const handleLogout = async () => {
+    setLoading(true);
+    localStorage.removeItem("access_token");
+    await UserService.logOutUser();
+    dispatch(resetUser());
+    setLoading(false);
+  };
+  useEffect(() => {
+    setLoading(true);
+
+    setUserName(user?.name);
+    setLoading(false);
+  }, [user.name]);
+  const content = (
+    <div>
+      {user && user?.isAdmin ? (
+        <>
+          <Button onClick={() => navigate("/profile-user")}>
+            Thông tin người dùng
+          </Button>
+          <br />
+          <Button>Đơn hàng của tôi</Button>
+          <br />
+          <Button onClick={() => navigate("/system/admin")}>
+            Quản lý hệ thống
+          </Button>
+          <br />
+          <Button onClick={handleLogout}>Đăng xuất</Button>
+        </>
+      ) : (
+        <>
+          <Button onClick={() => navigate("/profile-user")}>
+            Thông tin người dùng
+          </Button>
+          <br />
+          <Button>Đơn hàng của tôi</Button>
+          <br />
+          <Button onClick={handleLogout}>Đăng xuất</Button>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <div>
       <WrapperHeader gutter={20}>
@@ -28,12 +83,37 @@ function HeaderComponent() {
           span={6}
           style={{ display: "flex", gap: "30px", alignItems: "center" }}
         >
-          <WrapperHeaderAccount onClick={handleNavigateLogin}>
-            <button type="button" className="btn-account">
-              <i className="fa-regular fa-user" />
-              &nbsp;Tài khoản
-            </button>
-          </WrapperHeaderAccount>
+          <Loading isLoading={loading}>
+            {user && user?.name ? (
+              <Popover
+                placement="bottomLeft"
+                title="Menu"
+                content={content}
+                // arrow={mergedArrow}
+                trigger="click"
+              >
+                <button type="button" className="btn-account">
+                  {user?.avatar ? (
+                    <img
+                      src={user?.avatar}
+                      className="avatar-user-header"
+                      alt="avatar"
+                    />
+                  ) : (
+                    <i className="fa-regular fa-user" />
+                  )}
+                  &nbsp; {userName}
+                </button>
+              </Popover>
+            ) : (
+              <WrapperHeaderAccount onClick={handleNavigateLogin}>
+                <button type="button" className="btn-account">
+                  <i className="fa-regular fa-user" />
+                  &nbsp;Tài khoản
+                </button>
+              </WrapperHeaderAccount>
+            )}
+          </Loading>
           <div>
             <div className="icon-shopping">
               <Badge count={4}>
