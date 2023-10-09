@@ -1,4 +1,5 @@
 import axios from "axios";
+import { axiosJWT } from "./UserService";
 
 export const getAllProduct = async (search, limit) => {
   // limit = 6;
@@ -26,22 +27,33 @@ export const createProduct = async (data) => {
 
 export const getDetailProduct = async (id) => {
   const res = await axios.get(
-    `${process.env.REACT_APP_API_KEY}product/detail-product/${id}`
+    `${process.env.REACT_APP_API_KEY}product/get-details/${id}`
   );
   return res.data;
 };
 
-export const updateProduct = async (id, data) => {
+export const updateProduct = async (id, access_token, data) => {
+  console.log("data,token", id, access_token, data);
   const res = await axios.put(
-    `${process.env.REACT_APP_API_KEY}product/update-product/${id}`,
-    data
+    `${process.env.REACT_APP_API_KEY}product/update/${id}`,
+    data,
+    {
+      headers: {
+        token: `Bearer ${access_token}`,
+      },
+    }
   );
   return res.data;
 };
 
-export const deleteProduct = async (id) => {
+export const deleteProduct = async (id, access_token) => {
   const res = await axios.delete(
-    `${process.env.REACT_APP_API_KEY}product/delete-product/${id}`
+    `${process.env.REACT_APP_API_KEY}product/delete-product/${id}`,
+    {
+      headers: {
+        token: `Bearer ${access_token}`,
+      },
+    }
   );
   return res;
 };

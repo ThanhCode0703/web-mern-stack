@@ -31,3 +31,14 @@
 .btn-submit-create-product{
     margin: auto;
 }
+.btn-delete{
+    margin: 20px;
+}
+.btn-danger{
+    right: 20px;
+    position: absolute;
+
+}
+.ant-modal .ant-modal-content{
+    padding: 45px 24px;
+}

@@ -1,6 +1,6 @@
 import { Space, Table } from "antd";
 import { useState } from "react";
-import React, { useRef } from "react";
+import React from "react";
 
 import "./TableComponent.css";
 
@@ -8,7 +8,6 @@ import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import Loading from "../../loading/loading";
 
 function TableComponent(props) {
-  const tableRef = useRef(null);
   const {
     selectionType = "checkbox",
     data,
@@ -23,6 +22,10 @@ function TableComponent(props) {
     onChange: (selectedRowKeys, selectedRows) => {
       setRowSelected(selectedRowKeys);
     },
+    getCheckboxProps: (record) => ({
+      disabled: record.name === "Disabled User",
+      name: record.name,
+    }),
   };
 
   //xóa all
@@ -46,7 +49,6 @@ function TableComponent(props) {
         )}
         {/* <PieChartComponent /> */}
         <Table
-          ref={tableRef}
           rowSelection={{
             type: selectionType,
             ...rowSelection,
