@@ -1,6 +1,14 @@
 .product-management-admin-container{
     font-size: 14px;
 }
+/*css table product*/
+.product-admin-management-container{
+    min-width: 60rem;
+}
+.actions-product-admin-page{
+    display: flex;
+    gap: 0.25rem
+}
 /* Form */
 .create-product-form{
     align-items: center;

@@ -57,7 +57,6 @@ function HomePage() {
           className="button-component"
           textButton="Xem Thêm"
           type="outline"
-          styledTextButton={{ fontWeight: 500 }}
         ></ButtonComponent>
       </div>
     </div>

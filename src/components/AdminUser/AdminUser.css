@@ -1,0 +1,52 @@
+.user-management-admin-container{
+    font-size: 14px;
+}
+/*css table product*/
+.user-admin-management-container{
+    min-width: 60rem;
+}
+.actions-user-admin-page{
+    display: flex;
+    gap: 0.25rem
+}
+/* Form */
+.create-user-form{
+    align-items: center;
+    
+}
+/* chức năng */
+.btn-user-admin-management{
+    margin-top: 5px;
+    height: 50px;
+    border-style: solid;
+    font-weight: 600;
+    font-size: 16px;
+}
+.btn-user-admin-management.add{
+    color: #32de84;
+}
+/* bảng thống kê user */
+.table-content-management-user{
+    margin-top: 20px;
+}
+/* image product */
+.user-image-management{
+     height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.btn-submit-create-user{
+    margin: auto;
+}
+.btn-delete{
+    margin: 20px;
+}
+.btn-danger{
+    right: 20px;
+    position: absolute;
+
+}
+.ant-modal .ant-modal-content{
+    padding: 45px 24px;
+}

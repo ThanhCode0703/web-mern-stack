@@ -4,7 +4,7 @@ export const axiosJWT = axios.create();
 
 export const loginUser = async (data) => {
   const res = await axios.post(
-    `${process.env.REACT_APP_API_KEY}/user/sign-in`,
+    `${process.env.REACT_APP_API_KEY}user/sign-in`,
     data
   );
   return res.data;
@@ -12,7 +12,7 @@ export const loginUser = async (data) => {
 
 export const signupUser = async (data) => {
   const res = await axios.post(
-    `${process.env.REACT_APP_API_KEY}/user/sign-up`,
+    `${process.env.REACT_APP_API_KEY}user/sign-up`,
     data
   );
   return res.data;
@@ -20,7 +20,7 @@ export const signupUser = async (data) => {
 
 export const getDetailUser = async (id, access_token) => {
   const res = await axios.get(
-    `${process.env.REACT_APP_API_KEY}/user/get-details/${id}`,
+    `${process.env.REACT_APP_API_KEY}user/get-details/${id}`,
     {
       headers: {
         token: `Bearer ${access_token}`,
@@ -33,7 +33,7 @@ export const getDetailUser = async (id, access_token) => {
 
 export const refreshToken = async (refreshToken) => {
   const res = await axios.post(
-    `${process.env.REACT_APP_API_KEY}/user/refresh-token`,
+    `${process.env.REACT_APP_API_KEY}user/refresh-token`,
     {},
     {
       headers: {
@@ -45,13 +45,13 @@ export const refreshToken = async (refreshToken) => {
 };
 
 export const logOutUser = async (data) => {
-  const res = await axios.post(`${process.env.REACT_APP_API_KEY}/user/log-out`);
+  const res = await axios.post(`${process.env.REACT_APP_API_KEY}user/log-out`);
   return res.data;
 };
 
 export const updateUser = async (id, access_token, data) => {
   const res = await axios.post(
-    `${process.env.REACT_APP_API_KEY}/user/update-user/${id}`,
+    `${process.env.REACT_APP_API_KEY}user/update-user/${id}`,
     data,
     {
       headers: {
@@ -64,8 +64,17 @@ export const updateUser = async (id, access_token, data) => {
 };
 
 export const getAllUser = async (access_token) => {
-  const res = await axios.get(
-    `${process.env.REACT_APP_API_KEY}/user/get-all-users`,
+  const res = await axios.get(`${process.env.REACT_APP_API_KEY}user/getAll`, {
+    headers: {
+      token: `Bearer ${access_token}`,
+    },
+  });
+  return res.data;
+};
+
+export const deleteUser = async (id, access_token) => {
+  const res = await axios.delete(
+    `${process.env.REACT_APP_API_KEY}user/delete-user/${id}`,
     {
       headers: {
         token: `Bearer ${access_token}`,
@@ -75,16 +84,9 @@ export const getAllUser = async (access_token) => {
   return res.data;
 };
 
-export const deleteUser = async (id, access_token) => {
-  const res = await axios.delete(
-    `${process.env.REACT_APP_API_KEY}/user/delete-user/${id}`
-  );
-  return res.data;
-};
-
 export const deleteMutipleUsers = async (ids, access_token) => {
   const res = await axios.delete(
-    `${process.env.REACT_APP_API_KEY}/user/delete-multiple-user`,
+    `${process.env.REACT_APP_API_KEY}user/delete-multiple-user`,
     ids
   );
   return res.data;

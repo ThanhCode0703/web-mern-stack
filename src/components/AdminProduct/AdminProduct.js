@@ -1,8 +1,10 @@
 import TableComponent from "../Table/TableComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as message from "../../message/message";
+
 import {
+  SearchOutlined,
   UploadOutlined,
   DeleteOutlined,
   EditOutlined,
@@ -10,7 +12,7 @@ import {
 import "./AdminProduct.css";
 import { getBase64, renderOptions } from "../../utils";
 import ModalComponent from "../Modal/ModalComponent";
-import { Form, Select, Upload } from "antd";
+import { Form, Select, Space, Upload } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import * as ProductService from "../../service/ProductService";
 import { UserMutationHook } from "../../hook/UseMutationHook";
@@ -29,6 +31,9 @@ function AdminProduct() {
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   const [isModalOpenDelete, setIsModalOpenDelete] = useState(false);
   const user = useSelector((state) => state?.user);
+
+  const [searchedColumn, setSearchedColumn] = useState("");
+  const searchInput = useRef(null);
   const [stateProduct, setStateProduct] = useState({
     name: "",
     price: "",
@@ -167,19 +172,117 @@ function AdminProduct() {
       </div>
     );
   };
+  //dữ liệu để đổ vào bảng
+  const handleSearch = (selectedKeys, confirm, dataIndex) => {
+    confirm();
+  };
+  const handleReset = (clearFilters) => {
+    clearFilters();
+  };
+  const getColumnSearchProps = (dataIndex) => ({
+    filterDropdown: ({
+      setSelectedKeys,
+      selectedKeys,
+      confirm,
+      clearFilters,
+    }) => (
+      <div
+        style={{
+          padding: 15,
+        }}
+        onKeyDown={(e) => e.stopPropagation()}
+      >
+        <InputComponent
+          ref={searchInput}
+          placeholder={`Search ${dataIndex}`}
+          value={selectedKeys[0]}
+          onChange={(e) =>
+            setSelectedKeys(e.target.value ? [e.target.value] : [])
+          }
+          onPressEnter={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          style={{
+            marginBottom: 8,
+            display: "block",
+          }}
+        />
+        <Space>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
+          >
+            <i className="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => clearFilters && handleReset(clearFilters)}
+          >
+            <i class="fa-solid fa-arrow-rotate-left"></i> Reset
+          </button>
+        </Space>
+      </div>
+    ),
+    filterIcon: (filtered) => (
+      <SearchOutlined
+        style={{
+          color: filtered ? "#1677ff" : undefined,
+        }}
+      />
+    ),
+    onFilter: (value, record) =>
+      record[dataIndex].toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => searchInput.current?.select(), 100);
+      }
+    },
+  });
+
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
-      // render: (text) => <a>{text} </a>,
+      sorter: (a, b) => a.name.length - b.name.length,
+      ...getColumnSearchProps("name"),
     },
     {
       title: "Price",
       dataIndex: "price",
+      sorter: (a, b) => a.price - b.price,
+      filters: [
+        {
+          text: `Từ 5.000.000 VNĐ`,
+          value: `>=`,
+        },
+        {
+          text: `Nhỏ hơn 5.000.000 VNĐ`,
+          value: `<=`,
+        },
+      ],
+      onFilter: (value, record) => {
+        if (value === `>=`) return record.price >= 5000000;
+        if (value === `<=`) return record.price <= 5000000;
+      },
     },
     {
       title: "Rating",
       dataIndex: "rating",
+      sorter: (a, b) => a.rating - b.rating,
+      filters: [
+        {
+          text: `từ 3 sao trở lên`,
+          value: `>=`,
+        },
+        {
+          text: `dưới 3 sao`,
+          value: `<=`,
+        },
+      ],
+      onFilter: (value, record) => {
+        if (value === `>=`) return record.rating >= 3;
+        if (value === `<=`) return record.rating <= 3;
+      },
     },
     {
       title: "Type",
