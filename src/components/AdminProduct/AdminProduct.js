@@ -13,7 +13,7 @@ import "./AdminProduct.css";
 import { getBase64, renderOptions } from "../../utils";
 import ModalComponent from "../Modal/ModalComponent";
 import { Form, Select, Space, Upload } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import * as ProductService from "../../service/ProductService";
 import { UserMutationHook } from "../../hook/UseMutationHook";
 import InputComponent from "../InputComponent/InputComponent";
@@ -25,14 +25,12 @@ function AdminProduct() {
   const [form] = Form.useForm();
   const [rowSelected, setRowSelected] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [typeProduct, setTypeProduct] = useState([]);
   const [typeSelect, setTypeSelect] = useState("");
   const [isLoadingUpdate, setIsLoadingUpdate] = useState(false);
   const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   const [isModalOpenDelete, setIsModalOpenDelete] = useState(false);
   const user = useSelector((state) => state?.user);
 
-  const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
   const [stateProduct, setStateProduct] = useState({
     name: "",
@@ -55,7 +53,6 @@ function AdminProduct() {
     discount: "",
   });
 
-  const dispatch = useDispatch();
   //create sản phẩm
   const mutation = UserMutationHook((data) => {
     const {
@@ -85,7 +82,7 @@ function AdminProduct() {
   const mutationUpdate = UserMutationHook((data) => {
     const { id, token } = data;
 
-    const res = ProductService.updateProduct(id, token);
+    const res = ProductService.updateProduct(id, token, data);
 
     return res;
   });
@@ -98,31 +95,19 @@ function AdminProduct() {
     return res;
   });
 
+  const mutationDeleteMultipleProducts = UserMutationHook((data) => {
+    const { token, ...ids } = data;
+
+    const res = ProductService.deleteMultipleProduct(ids, token);
+
+    return res;
+  });
+
   const getAllProduct = async () => {
     const res = await ProductService.getAllProduct();
 
     return res;
   };
-
-  const {
-    data: dataUpdated,
-    isLoading: isLoadingUpdated,
-    isSuccess: isSuccessUpdated,
-    isError: isErrorUpdated,
-  } = mutationUpdate;
-
-  const {
-    data: dataDelete,
-    isLoading: isLoadingDelete,
-    isSuccess: isSuccessDelete,
-    isError: isErrorDelete,
-  } = mutationDelete;
-  const { data, isLoading, isSuccess, isError } = mutation;
-  const queryProduct = useQuery({
-    queryKey: ["products"],
-    queryFn: getAllProduct,
-  });
-  const { isLoading: isLoadingProducts, data: products } = queryProduct;
   const fetchGetDetailsProduct = async () => {
     const res = await ProductService.getDetailProduct(rowSelected);
     if (res?.data) {
@@ -139,6 +124,41 @@ function AdminProduct() {
     }
     setIsLoadingUpdate(false);
   };
+  const fetchAllTypeProduct = async () => {
+    const res = await ProductService.getAllTypeProduct();
+    return res;
+  };
+
+  const {
+    data: dataUpdated,
+    isLoading: isLoadingUpdated,
+    isSuccess: isSuccessUpdated,
+    isError: isErrorUpdated,
+  } = mutationUpdate;
+
+  const {
+    data: dataDelete,
+    isLoading: isLoadingDelete,
+    isSuccess: isSuccessDelete,
+    isError: isErrorDelete,
+  } = mutationDelete;
+  const {
+    data: dataDeleteMultipleProducts,
+    isLoading: isLoadingDeleteMultipleProducts,
+    isSuccess: isSuccessDeleteMultipleProducts,
+    isError: isErrorDeleteMultipleProducts,
+  } = mutationDeleteMultipleProducts;
+  const { data, isLoading, isSuccess, isError } = mutation;
+  const queryProduct = useQuery({
+    queryKey: ["products"],
+    queryFn: getAllProduct,
+  });
+  const typeProduct = useQuery({
+    queryKey: ["type-product"],
+    queryFn: fetchAllTypeProduct,
+  });
+
+  const { isLoading: isLoadingProducts, data: products } = queryProduct;
   useEffect(() => {
     form.setFieldValue();
   }, [form, stateProductDetails]);
@@ -155,6 +175,7 @@ function AdminProduct() {
     }
     setIsOpenDrawer(true);
   };
+
   const renderAction = () => {
     return (
       <div className="actions-product-admin-page">
@@ -308,9 +329,11 @@ function AdminProduct() {
     });
   };
   const handleOnChangeDetails = (e) => {
+    let copyState = { ...stateProductDetails };
+    copyState[e.target.name] = e.target.value;
+
     setStateProductDetails({
-      ...stateProductDetails,
-      [e.target.name]: e.target.value,
+      ...copyState,
     });
   };
 
@@ -341,6 +364,18 @@ function AdminProduct() {
     }
   }, [isSuccessDelete]);
 
+  useEffect(() => {
+    if (
+      isSuccessDeleteMultipleProducts &&
+      dataDeleteMultipleProducts?.status === "OK"
+    ) {
+      message.success();
+      handleCancel();
+    } else if (isErrorDeleteMultipleProducts) {
+      message.error();
+    }
+  }, [isSuccessDeleteMultipleProducts]);
+
   const handleCloseDrawer = () => {
     setIsOpenDrawer(false);
     setStateProductDetails({
@@ -361,7 +396,6 @@ function AdminProduct() {
     setIsModalOpenDelete(false);
   };
   const handleDeleteProduct = () => {
-    alert("xoas");
     mutationDelete.mutate(
       { id: rowSelected, token: user?.access_token },
       {
@@ -371,6 +405,18 @@ function AdminProduct() {
       }
     );
   };
+
+  const handleDeleteMultipleProducts = (ids) => {
+    mutationDeleteMultipleProducts.mutate(
+      { ids: ids, token: user?.access_token },
+      {
+        onSettled: () => {
+          queryProduct.refetch();
+        },
+      }
+    );
+  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
     setStateProduct({
@@ -441,6 +487,7 @@ function AdminProduct() {
       setTypeSelect(value);
     }
   };
+
   return (
     <div className="product-admin-management-container">
       <h1> Quản lý Sản Phẩm </h1>
@@ -456,6 +503,7 @@ function AdminProduct() {
           columns={columns}
           isLoading={isLoadingProducts}
           data={dataTable}
+          handleDeleteMany={handleDeleteMultipleProducts}
           onRow={(record, rowIndex) => {
             return {
               onClick: (event) => {
@@ -492,7 +540,7 @@ function AdminProduct() {
           >
             <Form.Item
               label="Tên sản phẩm"
-              name="name"
+              // name="name"
               valuePropName="field"
               rules={[
                 {
@@ -515,16 +563,16 @@ function AdminProduct() {
                 },
               ]}
               label="Loại sản phẩm"
-              name="type"
+              // name="type"
             >
               <Select
-                name="type"
-                value={typeSelect}
+                // name="type"
+                value={stateProduct.type}
                 onChange={handleOnchangeSelect}
                 style={{
                   width: 200,
                 }}
-                options={renderOptions(typeProduct)}
+                options={renderOptions(typeProduct?.data?.data)}
               />
               {typeSelect === "add-type" && (
                 <InputComponent
@@ -536,7 +584,7 @@ function AdminProduct() {
             </Form.Item>
             <Form.Item
               label="Giá"
-              name="price"
+              // name="price"
               rules={[
                 {
                   required: true,
@@ -553,7 +601,7 @@ function AdminProduct() {
 
             <Form.Item
               label="Mô tả"
-              name="description"
+              // name="description"
               rules={[
                 {
                   required: true,
@@ -569,7 +617,7 @@ function AdminProduct() {
             </Form.Item>
             <Form.Item
               label="giảm giá"
-              name="discount"
+              // name="discount"
               rules={[
                 {
                   required: true,
@@ -585,7 +633,7 @@ function AdminProduct() {
             </Form.Item>
             <Form.Item
               label="Số lượng"
-              name="countInStock"
+              // name="countInStock"
               rules={[
                 {
                   required: true,
@@ -622,7 +670,7 @@ function AdminProduct() {
             </Form.Item>
             <Form.Item
               label="Đánh giá"
-              name="rating"
+              // name="rating"
               rules={[
                 {
                   required: true,
@@ -663,7 +711,7 @@ function AdminProduct() {
         <Loading isLoading={isLoadingUpdate || isLoadingUpdated}>
           <Form
             form={form}
-            name="formProduct"
+            name="basic"
             className="create-product-form"
             labelCol={{
               span: 5,
@@ -689,7 +737,7 @@ function AdminProduct() {
             >
               <InputComponent
                 value={stateProductDetails.name}
-                onChange={handleOnChangeDetails}
+                onChange={(e) => handleOnChangeDetails(e)}
                 name="name"
               />
             </Form.Item>
@@ -703,22 +751,11 @@ function AdminProduct() {
               label="Loại sản phẩm"
               // name="type"
             >
-              <Select
+              <InputComponent
+                value={stateProductDetails["type"]}
+                onChange={handleOnChangeDetails}
                 name="type"
-                value={stateProductDetails.type}
-                onChange={handleOnchangeSelect}
-                style={{
-                  width: 200,
-                }}
-                options={renderOptions(typeProduct)}
               />
-              {typeSelect === "add-type" && (
-                <InputComponent
-                  value={stateProductDetails.type}
-                  onChange={handleOnChangeDetails}
-                  name="type"
-                />
-              )}
             </Form.Item>
             <Form.Item
               label="Giá"

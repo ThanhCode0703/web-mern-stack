@@ -12,15 +12,15 @@ function TableComponent(props) {
     selectionType = "checkbox",
     data,
     columns,
-    handleDeleteMutipleProducts,
+    handleDeleteMany,
     isLoading = false,
   } = props;
-  const [rowSelected, setRowSelected] = useState([]);
+  const [rowSelectedKeys, setRowSelectedKeys] = useState([]);
 
   // rowSelection object indicates the need for row selection
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
-      setRowSelected(selectedRowKeys);
+      setRowSelectedKeys(selectedRowKeys);
     },
     getCheckboxProps: (record) => ({
       disabled: record.name === "Disabled User",
@@ -30,13 +30,13 @@ function TableComponent(props) {
 
   //xóa all
   const handleDeleteAll = () => {
-    handleDeleteMutipleProducts(rowSelected);
+    handleDeleteMany(rowSelectedKeys);
   };
 
   return (
     <Loading isLoading={isLoading}>
       <div className="table-component-container">
-        {rowSelected.length > 0 && (
+        {!!rowSelectedKeys.length > 0 && (
           <div>
             <Space>
               <ButtonComponent

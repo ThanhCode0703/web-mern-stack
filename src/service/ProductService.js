@@ -33,7 +33,6 @@ export const getDetailProduct = async (id) => {
 };
 
 export const updateProduct = async (id, access_token, data) => {
-  console.log("data,token", id, access_token, data);
   const res = await axios.put(
     `${process.env.REACT_APP_API_KEY}product/update/${id}`,
     data,
@@ -58,10 +57,15 @@ export const deleteProduct = async (id, access_token) => {
   return res;
 };
 
-export const deleteMutipleProduct = async (ids) => {
+export const deleteMultipleProduct = async (ids, access_token) => {
   const res = await axios.post(
     `${process.env.REACT_APP_API_KEY}product/delete-multiple-product`,
-    ids
+    ids,
+    {
+      headers: {
+        token: `Bearer ${access_token}`,
+      },
+    }
   );
   return res;
 };

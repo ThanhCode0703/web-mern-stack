@@ -80,7 +80,7 @@ function AdminUser() {
   const mutationUpdate = UserMutationHook((data) => {
     const { id, token } = data;
 
-    const res = UserService.updateUser(id, token);
+    const res = UserService.updateUser(id, token, data);
 
     return res;
   });
@@ -93,12 +93,21 @@ function AdminUser() {
     return res;
   });
 
+  const mutationDeleteMany = UserMutationHook((data) => {
+    const { token, ids } = data;
+
+    const res = UserService.deleteMultipleUsers(ids, token);
+
+    return res;
+  });
+
   const getAllUser = async () => {
     const res = await UserService.getAllUser(user?.access_token);
 
     return res;
   };
 
+  const { data, isLoading, isSuccess, isError } = mutation;
   const {
     data: dataUpdated,
     isLoading: isLoadingUpdated,
@@ -112,7 +121,12 @@ function AdminUser() {
     isSuccess: isSuccessDelete,
     isError: isErrorDelete,
   } = mutationDelete;
-  const { data, isLoading, isSuccess, isError } = mutation;
+  const {
+    data: dataDeleteMany,
+    isLoading: isLoadingDeleteMany,
+    isSuccess: isSuccessDeleteMany,
+    isError: isErrorDeleteMany,
+  } = mutationDeleteMany;
   const queryUser = useQuery({
     queryKey: ["user"],
     queryFn: getAllUser,
@@ -338,6 +352,14 @@ function AdminUser() {
     }
   }, [isSuccessDelete]);
 
+  useEffect(() => {
+    if (isSuccessDeleteMany && dataDeleteMany?.status === "OK") {
+      message.success();
+    } else if (isErrorDeleteMany) {
+      message.error();
+    }
+  }, [isSuccessDeleteMany]);
+
   const handleCloseDrawer = () => {
     setIsOpenDrawer(false);
     setStateUserDetail({
@@ -358,7 +380,7 @@ function AdminUser() {
     setIsModalOpenDelete(false);
   };
   const handleDeleteUser = () => {
-    alert("xoas");
+    alert("xóa");
     mutationDelete.mutate(
       { id: rowSelected, token: user?.access_token },
       {
@@ -368,6 +390,18 @@ function AdminUser() {
       }
     );
   };
+
+  const handleDeleteMultipleUser = (ids) => {
+    mutationDeleteMany.mutate(
+      { ids: ids, token: user?.access_token },
+      {
+        onSettled: () => {
+          queryUser.refetch();
+        },
+      }
+    );
+  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
     setStateUser({
@@ -384,7 +418,6 @@ function AdminUser() {
     form.resetFields();
   };
   const onFinish = () => {
-    console.log(stateUser);
     mutation.mutate(...stateUser, {
       onSettled: () => {
         queryUser.refetch();
@@ -445,6 +478,7 @@ function AdminUser() {
           columns={columns}
           isLoading={isLoadingUsers}
           data={dataTable}
+          handleDeleteMany={handleDeleteMultipleUser}
           onRow={(record, rowIndex) => {
             return {
               onClick: (event) => {
@@ -616,7 +650,7 @@ function AdminUser() {
         onClose={() => setIsOpenDrawer(false)}
         width="40%"
       >
-        <Loading isLoading={isLoadingUpdate}>
+        <Loading isLoading={isLoadingUpdated}>
           <Form
             form={form}
             name="formUserDetail"

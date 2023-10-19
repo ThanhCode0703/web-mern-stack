@@ -84,10 +84,15 @@ export const deleteUser = async (id, access_token) => {
   return res.data;
 };
 
-export const deleteMutipleUsers = async (ids, access_token) => {
-  const res = await axios.delete(
+export const deleteMultipleUsers = async (ids, access_token) => {
+  const res = await axios.post(
     `${process.env.REACT_APP_API_KEY}user/delete-multiple-user`,
-    ids
+    ids,
+    {
+      headers: {
+        token: `Bearer ${access_token}`,
+      },
+    }
   );
   return res.data;
 };
