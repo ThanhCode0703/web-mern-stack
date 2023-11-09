@@ -3,6 +3,8 @@ import React from "react";
 import "./CardComponent.css";
 import { StarFilled } from "@ant-design/icons";
 import logo from "../../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
+import { convertPrice } from "../../utils";
 function CardComponent(props) {
   const {
     countInStock,
@@ -14,7 +16,14 @@ function CardComponent(props) {
     rating,
     type,
     selled,
+    id,
   } = props;
+  const navigate = useNavigate();
+  const handleDetailsProduct = (id) => {
+    if (id) {
+      navigate(`/product-detail/${id}`);
+    }
+  };
 
   return (
     <div className="card-component">
@@ -22,15 +31,11 @@ function CardComponent(props) {
         hoverable
         style={{ width: "200px" }}
         bodyStyle={{ padding: "10px" }}
-        cover={
-          <img
-            alt="example"
-            src="https://salt.tikicdn.com/cache/750x750/ts/product/a2/38/6c/ce008c63f4ac771550439da44f5f8ee8.png"
-          />
-        }
+        onClick={() => handleDetailsProduct(id)}
+        cover={<img alt="example" src={image} />}
       >
         <img className="logo-card-component" src={logo} alt="logo" />
-        <div>{name}</div>
+        <div className="wrapper-card-component-name">{name}</div>
 
         <div className="description">
           {" "}
@@ -40,8 +45,8 @@ function CardComponent(props) {
           </span>
           <span> | Đã Bán {selled || 1000}+</span>
           <div className="cost">
-            {price}
-            <span className="discount">{discount || 5}%</span>
+            {convertPrice(price)}
+            <span className="discount-product">- {discount || 5}%</span>
           </div>
         </div>
       </Card>

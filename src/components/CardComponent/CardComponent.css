@@ -3,6 +3,10 @@
     align-items: center;
     gap: 20px;
 }
+.wrapper-card-component-name{ 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .logo-card-component{
     width: 68px;
     height: 16px;

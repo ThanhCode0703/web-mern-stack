@@ -4,7 +4,7 @@ import InputForm from "../../../components/InputForm/InputForm";
 import imglogin from "../../../assets/images/logo-login.png";
 import { Form, Image } from "antd";
 import ButtonComponent from "../../../components/ButtonComponent/ButtonComponent";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserMutationHook } from "../../../hook/UseMutationHook";
 import * as UserService from "../../../service/UserService";
 import Loading from "../../../loading/loading";
@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { updateUser } from "../../../redux/slides/userSlide";
 function SignInPage() {
   const [isShowPassword, setIsShowPassword] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
   const handleNavigateSignup = () => {
     navigate("/sign-up");
@@ -40,8 +41,11 @@ function SignInPage() {
 
   useEffect(() => {
     if (isSuccess) {
-      message.success();
-      navigate("/");
+      if (location?.state) {
+        navigate(location?.state);
+      } else {
+        navigate("/");
+      }
       localStorage.setItem("access_token", JSON.stringify(data?.access_token));
       if (data?.access_token) {
         const decoded = jwt_decode(data?.access_token);

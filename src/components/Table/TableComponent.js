@@ -1,13 +1,15 @@
 import { Space, Table } from "antd";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import React from "react";
 
 import "./TableComponent.css";
 
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import Loading from "../../loading/loading";
+import { DownloadTableExcel } from "react-export-table-to-excel";
 
 function TableComponent(props) {
+  const tableRef = useRef(null);
   const {
     selectionType = "checkbox",
     data,
@@ -47,8 +49,17 @@ function TableComponent(props) {
             </Space>
           </div>
         )}
-        {/* <PieChartComponent /> */}
+        <DownloadTableExcel
+          filename="user-table"
+          sheet="users"
+          currentTableRef={tableRef.current}
+        >
+          <button type="button" className="btn btn-success">
+            Tải về file excel
+          </button>
+        </DownloadTableExcel>
         <Table
+          ref={tableRef}
           rowSelection={{
             type: selectionType,
             ...rowSelection,

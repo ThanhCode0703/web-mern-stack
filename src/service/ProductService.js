@@ -1,5 +1,4 @@
 import axios from "axios";
-import { axiosJWT } from "./UserService";
 
 export const getAllProduct = async (search, limit) => {
   // limit = 6;
@@ -77,20 +76,12 @@ export const getAllTypeProduct = async () => {
   return res.data;
 };
 
-export const getAllProdctType = async (type, page, limit) => {
+export const getProductType = async (type, page, limit) => {
   if (type) {
     const res = await axios.get(
-      `${process.env.REACT_APP_API_KEY}product/detail-all-product?filter=type&filter=${type}&limit=${limit}&page=${page}`
+      `${process.env.REACT_APP_API_KEY}product/getAll?filter=type&filter=${type}&limit=${limit}&page=${page}`
     );
 
     return res.data;
   }
-};
-
-export const getDetailWithName = async (name) => {
-  const res = await axios.get(
-    `${process.env.REACT_APP_API_KEY}product/get-details-with-name/${name}`
-  );
-
-  return res.data;
 };

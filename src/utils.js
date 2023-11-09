@@ -6,13 +6,14 @@ export const isJsonString = (data) => {
   }
   return true;
 };
-export const getBase64 = (file) =>
-  new Promise((resolve, reject) => {
+export const getBase64 = (file) => {
+  return new Promise(async (resolve, reject) => {
     const reader = new FileReader();
-    reader.readAsDataURL(file);
+    await reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   });
+};
 export function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -37,4 +38,12 @@ export const renderOptions = (arr) => {
     value: "add-type",
   });
   return result;
+};
+export const convertPrice = (price) => {
+  try {
+    const result = price?.toLocaleString().replace(",", ".");
+    return `${result} VND`;
+  } catch (err) {
+    return null;
+  }
 };

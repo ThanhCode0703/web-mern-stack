@@ -26,19 +26,10 @@
 .button-component{
     margin: 20px;
     margin-left: 120px;
-    background-color: #fff;
-    border: 1px solid rgb(11,116,229);
-    color: rgb(11,116,229);
     width: 240px;
     height: 38px;
     border-radius: 4px;
-    &:hover {
-        color: #fff;
-        background: rgb(13,92,182);
-        span {
-            color: #fff;
-        }
-    }
+
 }
 .wrapper-button-component{
     width: 100%;

@@ -6,6 +6,7 @@
 }
 .wrapper-type-product-page{
     margin: 0 120px;
+    height: 100%;
 }
 .card-type{
     margin-top: 20px;
@@ -22,6 +23,7 @@
         flex-wrap: wrap;
 }
 .type-product-pagination{
+    text-align:center;
     width: 100%;
     display: flex;
     align-items: center;

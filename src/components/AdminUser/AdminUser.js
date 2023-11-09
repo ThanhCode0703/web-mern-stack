@@ -220,7 +220,7 @@ function AdminUser() {
         <Space>
           <button
             type="button"
-            class="btn btn-primary"
+            className="btn btn-primary"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
           >
             <i className="fa-solid fa-magnifying-glass"></i> Search
@@ -230,7 +230,7 @@ function AdminUser() {
             className="btn btn-secondary"
             onClick={() => clearFilters && handleReset(clearFilters)}
           >
-            <i class="fa-solid fa-arrow-rotate-left"></i> Reset
+            <i className="fa-solid fa-arrow-rotate-left"></i> Reset
           </button>
         </Space>
       </div>
@@ -418,7 +418,7 @@ function AdminUser() {
     form.resetFields();
   };
   const onFinish = () => {
-    mutation.mutate(...stateUser, {
+    mutation.mutate(stateUser, {
       onSettled: () => {
         queryUser.refetch();
       },

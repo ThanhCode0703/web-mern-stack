@@ -1,0 +1,115 @@
+.payment-success-page-container{
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin-top: 85px;
+    height: 100vh;    
+}
+.title-page{
+    margin-bottom: 20px;
+}
+
+.payment-success-page-wrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper-infor-payment-success{
+    width: 1000px;
+    justify-content: center;
+    padding: 17px 20px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.label-payment-success{
+    font-size: 14px;
+    color: #000;
+    font-weight: bold
+}
+.payment-success-lable{
+   background: rgb(240, 248, 255);
+   border: 1px solid rgb(63, 195, 195);
+   padding: 10px;
+   width: fit-content;
+   border-radius: 8px;
+   margin-top: 5px;
+}
+
+/* sanr phaamr */
+.wrapper-info-payment-success{
+    padding: 17px 20px;
+    border-bottom: 1px solid #f5f5f5;
+    background: #fff;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    
+}
+
+.order-count-order-page-success{
+    flex: 1; 
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wrapper-order-items-success{
+    display: flex;
+    align-items: center;
+    padding: 9px 16px ;
+    background: #fff;
+    margin-top: 12px;
+    
+}
+
+.wrapper-order-image-name-success{
+    width: 390px;
+    display: flex; 
+    align-items: center; 
+    gap: 4;
+}
+
+.order-image-order-page-success{
+    width: 77px;
+    height: 79px; 
+    object-fit: cover 
+}
+
+.order-name-order-page-success{
+    width: 260;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-left: 5px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.order-count-span-order-page-success{
+    font-size: 13px;
+    font-weight: 500; 
+    color: #242424; 
+}
+.wrapper-count-order-payment-success{
+    display: flex;
+  align-items: center;
+  width: 84px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.order-price-order-page-success{
+    color: rgb(255, 66, 78);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* tổng tiền */
+.total-price-payment-success{
+    font-size: 18px;
+    font-weight: 700;
+    float: right;
+    color: rgb(254, 56, 52);
+}

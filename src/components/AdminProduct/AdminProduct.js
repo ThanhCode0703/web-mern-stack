@@ -160,7 +160,7 @@ function AdminProduct() {
 
   const { isLoading: isLoadingProducts, data: products } = queryProduct;
   useEffect(() => {
-    form.setFieldValue();
+    form.setFieldsValue();
   }, [form, stateProductDetails]);
   useEffect(() => {
     if (rowSelected) {
@@ -229,7 +229,7 @@ function AdminProduct() {
         <Space>
           <button
             type="button"
-            class="btn btn-primary"
+            className="btn btn-primary"
             onClick={() => handleSearch(selectedKeys, confirm, dataIndex)}
           >
             <i className="fa-solid fa-magnifying-glass"></i> Search
@@ -239,7 +239,7 @@ function AdminProduct() {
             className="btn btn-secondary"
             onClick={() => clearFilters && handleReset(clearFilters)}
           >
-            <i class="fa-solid fa-arrow-rotate-left"></i> Reset
+            <i className="fa-solid fa-arrow-rotate-left"></i> Reset
           </button>
         </Space>
       </div>

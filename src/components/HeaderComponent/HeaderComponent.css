@@ -46,3 +46,6 @@
     object-fit: cover;
     width: 30px;
 }
+.icon-shopping{
+    cursor: pointer
+}

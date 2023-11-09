@@ -6,6 +6,7 @@ import {
   WrapperTextHeader,
   WrapperTextHeaderSmall,
 } from "./style";
+import { searchProduct } from "../../redux/slides/ProductSlide";
 
 import ButtonInputSearch from "../ButtonInputSearch/ButtonInputSearch";
 import { useNavigate } from "react-router-dom";
@@ -16,12 +17,13 @@ import { resetUser } from "../../redux/slides/userSlide";
 import { useEffect, useState } from "react";
 import Loading from "../../loading/loading";
 
-function HeaderComponent() {
+function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
-
+  const [search, setSearch] = useState("");
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
+  const order = useSelector((state) => state.order);
   const handleNavigateLogin = () => {
     navigate("/sign-in");
   };
@@ -69,6 +71,10 @@ function HeaderComponent() {
       )}
     </div>
   );
+  const onSearch = (e) => {
+    setSearch(e.target.value);
+    dispatch(searchProduct(e.target.value));
+  };
 
   return (
     <div>
@@ -77,7 +83,11 @@ function HeaderComponent() {
           <WrapperTextHeader>NgocThanhCN20E</WrapperTextHeader>
         </Col>
         <Col span={12}>
-          <ButtonInputSearch size="large" placeholder="input search text " />
+          <ButtonInputSearch
+            size="large"
+            placeholder="input search text "
+            onChange={onSearch}
+          />
         </Col>
         <Col
           span={6}
@@ -114,14 +124,16 @@ function HeaderComponent() {
               </WrapperHeaderAccount>
             )}
           </Loading>
-          <div>
-            <div className="icon-shopping">
-              <Badge count={4}>
-                <i className="fa-solid fa-cart-shopping"></i>
-              </Badge>
-              <WrapperTextHeaderSmall>Giỏ Hàng</WrapperTextHeaderSmall>
+          {!isHiddenCart && (
+            <div>
+              <div className="icon-shopping" onClick={() => navigate("/order")}>
+                <Badge count={order?.orderItems.length}>
+                  <i className="fa-solid fa-cart-shopping"></i>
+                </Badge>
+                <WrapperTextHeaderSmall>Giỏ Hàng</WrapperTextHeaderSmall>
+              </div>
             </div>
-          </div>
+          )}
         </Col>
       </WrapperHeader>
     </div>
