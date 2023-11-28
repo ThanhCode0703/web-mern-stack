@@ -10,3 +10,8 @@
     display: flex;
     justify-content: center;
 }
+.wrapper-container-product-page{
+     position: relative;
+  padding-left: 424px;
+  padding-right: 200px;
+}

@@ -53,7 +53,7 @@ function ProductsPage() {
             return <TypeProduct name={item} key={index} />;
           })}
         </div>
-        <div className="wrapper-container-homepage">
+        <div className="wrapper-container-product-page">
           <div className="wrapper-card-component">
             {products?.data?.map((product) => {
               return (
