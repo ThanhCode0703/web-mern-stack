@@ -65,7 +65,7 @@ const PaymentPage = () => {
   }, [order]);
 
   const priceDiscountMemo = useMemo(() => {
-    const result = order?.orderItemsSlected?.reduce((total, cur) => {
+    const result = order?.orderItemsSelected?.reduce((total, cur) => {
       const totalDiscount = cur.discount ? cur.discount : 0;
       return total + (priceMemo * (totalDiscount * cur.amount)) / 100;
     }, 0);
@@ -219,25 +219,25 @@ const PaymentPage = () => {
     setPayment(e.target.value);
   };
 
-  // const addPaypalScript = async () => {
-  //   const { data } = await PaymentService.getConfig();
-  //   const script = document.createElement("script");
-  //   script.type = "text/javascript";
-  //   // script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
-  //   script.async = true;
-  //   script.onload = () => {
-  //     setSdkReady(true);
-  //   };
-  //   document.body.appendChild(script);
-  // };
+  const addPaypalScript = async () => {
+    const { data } = await PaymentService.getConfig();
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = `https://www.paypal.com/sdk/js?client-id=${data}`;
+    script.async = true;
+    script.onload = () => {
+      setSdkReady(true);
+    };
+    document.body.appendChild(script);
+  };
 
-  // useEffect(() => {
-  //   if (!window.paypal) {
-  //     addPaypalScript();
-  //   } else {
-  //     setSdkReady(true);
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!window.paypal) {
+      addPaypalScript();
+    } else {
+      setSdkReady(true);
+    }
+  }, []);
 
   return (
     <div className="payment-page-container">
@@ -371,12 +371,21 @@ const PaymentPage = () => {
                 <div style={{ width: "320px" }}>
                   <PayPalButtons
                     amount={Math.round(priceMemo / 23000)}
-                    // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
-                    onSuccess={onSuccessPaypal}
+                    onClick={onSuccessPaypal}
                     onError={(e) => {
                       alert(e);
                     }}
                   />
+                  {/* <PayPalButtons
+                    amount={totalPriceMemo / 23000}
+                    value={totalPriceMemo / 23000}
+                    // shippingPreference="NO_SHIPPING"
+                    // default is "GET_FROM_FILE"
+                    onSuccess={() => alert("thanhf coong ")}
+                    onError={(e) => {
+                      alert(e);
+                    }}
+                  /> */}
                 </div>
               ) : (
                 <ButtonComponent

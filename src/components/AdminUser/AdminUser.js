@@ -10,6 +10,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { UserMutationHook } from "../../hook/UseMutationHook";
 import * as message from "../../message/message";
+import { toast } from "react-toastify";
 import {
   SearchOutlined,
   UploadOutlined,
@@ -389,6 +390,8 @@ function AdminUser() {
         },
       }
     );
+    setIsModalOpenDelete(false);
+    toast.success("Xóa người dùng thành công!");
   };
 
   const handleDeleteMultipleUser = (ids) => {
@@ -468,7 +471,7 @@ function AdminUser() {
       <h1> Quản lý người dùng </h1>
       <button
         type="button"
-        className="btn btn-outline-success"
+        className="btn btn-primary"
         onClick={() => setIsModalOpen(true)}
       >
         <i className="fa-solid fa-user-plus"></i> Thêm

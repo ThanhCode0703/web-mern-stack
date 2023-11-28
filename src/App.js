@@ -10,6 +10,7 @@ import { isJsonString } from "./utils";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "./redux/slides/userSlide";
 import Loading from "./loading/loading";
+import { ToastContainer } from "react-toastify";
 function App() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -58,6 +59,18 @@ function App() {
   };
   return (
     <div>
+      <ToastContainer
+        position="top-center"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Loading isLoading={isLoading}>
         <Router>
           <Routes>

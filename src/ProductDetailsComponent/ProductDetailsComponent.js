@@ -66,7 +66,7 @@ function ProductDetailsComponent(idProduct) {
               alt="banh trung thu"
               preview={false}
             />
-            <Row className="small-image">
+            {/* <Row className="small-image">
               <Col span={4}>
                 <Image
                   src={SmallBanhTrungThu1}
@@ -109,7 +109,7 @@ function ProductDetailsComponent(idProduct) {
                   preview={false}
                 />
               </Col>
-            </Row>
+            </Row> */}
           </Col>
           <Col span={14}>
             <div className="wrapper-style-name-product">
@@ -185,7 +185,6 @@ function ProductDetailsComponent(idProduct) {
                   </button>
                 </div>
               </Col>
-              <Col span={8}></Col>
             </Row>
           </Col>
         </Row>

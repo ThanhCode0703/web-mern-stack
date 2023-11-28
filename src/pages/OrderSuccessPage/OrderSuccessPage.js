@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import Loading from "../../loading/loading";
 import "./OrderSuccessPage.css";
 import { orderConstant } from "../../content";
@@ -8,7 +7,6 @@ import { convertPrice } from "../../utils";
 const OrderSuccessPage = () => {
   const location = useLocation();
   const { state } = location;
-  console.log(state);
   return (
     <div className="payment-success-page-container">
       <h2 className="title-page">Đặt hàng thành công</h2>

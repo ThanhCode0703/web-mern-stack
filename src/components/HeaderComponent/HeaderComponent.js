@@ -1,5 +1,6 @@
-import { Badge, Button, Col, Popover } from "antd";
+import { Badge, Button, Col, Image, Popover } from "antd";
 import "./HeaderComponent.css";
+import logo1 from "../../assets/images/logo1.png";
 import {
   WrapperHeader,
   WrapperHeaderAccount,
@@ -16,25 +17,34 @@ import { useDispatch } from "react-redux";
 import { resetUser } from "../../redux/slides/userSlide";
 import { useEffect, useState } from "react";
 import Loading from "../../loading/loading";
-
+import { persistor } from "../../redux/store";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
+  const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [userName, setUserName] = useState("");
   const [loading, setLoading] = useState(false);
   const order = useSelector((state) => state.order);
+
   const handleNavigateLogin = () => {
     navigate("/sign-in");
   };
   const dispatch = useDispatch();
-
-  const handleLogout = async () => {
+  const handleLogOut = () => {
     setLoading(true);
     localStorage.removeItem("access_token");
-    await UserService.logOutUser();
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("__paypal_storage__");
+    persistor.pause();
+    persistor.flush().then(() => {
+      return persistor.purge();
+    });
     dispatch(resetUser());
     setLoading(false);
+    navigate("/");
   };
   useEffect(() => {
     setLoading(true);
@@ -44,29 +54,37 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
   }, [user.name]);
   const content = (
     <div>
-      {user && user?.isAdmin ? (
+      {user?.isAdmin ? (
         <>
-          <Button onClick={() => navigate("/profile-user")}>
+          <Button onClick={() => handleClickNavigate("profile")}>
             Thông tin người dùng
           </Button>
           <br />
-          <Button>Đơn hàng của tôi</Button>
+          <Button onClick={() => handleClickNavigate(`order`)}>
+            Đơn hàng của tôi
+          </Button>
           <br />
-          <Button onClick={() => navigate("/system/admin")}>
+          <Button onClick={() => handleClickNavigate("admin")}>
             Quản lý hệ thống
           </Button>
           <br />
-          <Button onClick={handleLogout}>Đăng xuất</Button>
+          <Button onClick={() => handleClickNavigate("log-out")}>
+            Đăng xuất
+          </Button>
         </>
       ) : (
         <>
-          <Button onClick={() => navigate("/profile-user")}>
+          <Button onClick={() => handleClickNavigate("profile")}>
             Thông tin người dùng
           </Button>
           <br />
-          <Button>Đơn hàng của tôi</Button>
+          <Button onClick={() => handleClickNavigate("order")}>
+            Đơn hàng của tôi
+          </Button>
           <br />
-          <Button onClick={handleLogout}>Đăng xuất</Button>
+          <Button onClick={() => handleClickNavigate("log-out")}>
+            Đăng xuất
+          </Button>
         </>
       )}
     </div>
@@ -75,22 +93,46 @@ function HeaderComponent({ isHiddenSearch = false, isHiddenCart = false }) {
     setSearch(e.target.value);
     dispatch(searchProduct(e.target.value));
   };
+  const handleClickNavigate = (type) => {
+    if (type === "profile") {
+      navigate("/profile-user");
+    } else if (type === "admin") {
+      navigate("/system/admin");
+    } else if (type === "order") {
+      navigate("/my-orders", {
+        state: {
+          id: user?.id,
+        },
+      });
+    } else {
+      handleLogOut();
+    }
+    setIsOpen(false);
+  };
+  const handleComeBack = () => {
+    navigate("/");
+  };
 
   return (
-    <div>
+    <div className="header-off-web">
       <WrapperHeader gutter={20}>
         <Col span={6}>
-          <WrapperTextHeader>NgocThanhCN20E</WrapperTextHeader>
+          <WrapperTextHeader onClick={handleComeBack}>
+            <div className="logo-header">
+              <Image src={logo1} alt="logo-login" preview={false} />
+            </div>
+          </WrapperTextHeader>
         </Col>
-        <Col span={12}>
+        <Col span={13}>
           <ButtonInputSearch
             size="large"
-            placeholder="input search text "
+            // bordered={false}
+            placeholder="Nhập tên sản phẩm cần tìm"
             onChange={onSearch}
           />
         </Col>
         <Col
-          span={6}
+          span={5}
           style={{ display: "flex", gap: "30px", alignItems: "center" }}
         >
           <Loading isLoading={loading}>

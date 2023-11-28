@@ -1,11 +1,11 @@
 .search {
     display: flex;
+    
 }
 
 .search-input {
-    width: 80%;
-    margin-right: 3px;
-    margin-top: 5px;
+    width: 90%;
+    margin: 5px 3px;
     caret-color: rgba(254, 44, 85, 1);
     &::hover {
         border: 1px solid black;
@@ -13,6 +13,6 @@
 }
 
 .search-button {
-    width: 10%;
-    padding: 5px;
+    width: 20%; 
+    margin: 5px 3px;
 }

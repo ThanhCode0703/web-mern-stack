@@ -12,6 +12,7 @@ import * as message from "../../../message/message";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../../redux/slides/userSlide";
+import { toast } from "react-toastify";
 function SignInPage() {
   const [isShowPassword, setIsShowPassword] = useState(false);
   const location = useLocation();
@@ -40,12 +41,14 @@ function SignInPage() {
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (data && data.status === "OK") {
       if (location?.state) {
+        // state chứa địa chỉ trang mình ở trước đó
         navigate(location?.state);
       } else {
         navigate("/");
       }
+      toast.success("Đăng nhập thành công!");
       localStorage.setItem("access_token", JSON.stringify(data?.access_token));
       if (data?.access_token) {
         const decoded = jwt_decode(data?.access_token);
@@ -55,7 +58,10 @@ function SignInPage() {
         }
       }
     }
-  }, [isSuccess]);
+    if (data && data.status === "ERR") {
+      toast.error("Đăng nhập không thành công");
+    }
+  }, [data]);
   const handleGetDetailsUser = async (id, token) => {
     const res = await UserService.getDetailUser(id, token);
     dispatch(updateUser({ ...res?.data, access_token: token }));
@@ -106,7 +112,7 @@ function SignInPage() {
                 />
               </Form.Item>
             </div>
-            <Loading isLoading={isLoading}>
+            <Loading isLoading={isLoading} delay={1000}>
               <ButtonComponent
                 disabled={!email.length || !password.length}
                 className="btn-sign-in"

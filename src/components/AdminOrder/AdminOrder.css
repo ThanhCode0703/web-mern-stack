@@ -1,0 +1,21 @@
+.order-detail-order-admin-left{
+    border-right: 1px solid #000;
+}
+.order-detail-order-admin-right{
+    padding: 10px   ;
+}
+.detail-product-in-order{
+    margin-top: 10px;
+    margin-right: 10px;
+    border-top: 1px solid #ccc;
+    .product-detail-info{
+        padding: 10px;
+    }
+}
+.image-product-buy-order-admin{
+    width: 90px;
+    height: 90px;
+}
+.chart-order-buy{
+    float: right;
+}

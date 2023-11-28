@@ -38,9 +38,14 @@ export const getDetailsOrders = async (id) => {
 };
 
 //lấy tất cả hóa Đơn
-export const getAllOrder = async () => {
+export const getAllOrder = async (access_token) => {
   const res = await axios.get(
-    `${process.env.REACT_APP_API_KEY}order/get-all-order`
+    `${process.env.REACT_APP_API_KEY}order/get-all-order`,
+    {
+      headers: {
+        token: `Bearer ${access_token}`,
+      },
+    }
   );
   return res.data;
 };

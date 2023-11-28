@@ -21,7 +21,7 @@ function SliderComponent({ arrImages }) {
             alt="slider"
             key={index}
             preview={false}
-            width="100%"
+            width="90%"
           />
         );
       })}

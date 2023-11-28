@@ -8,8 +8,19 @@ function ButtonInputSearch(props) {
   const { size, placeholder, ...rests } = props;
   return (
     <div className="Search">
-      <InputComponent className="search-input" size={size} placeholder={placeholder} {...rests} />
-      <ButtonComponent className="search-button" size={size} icon={<SearchOutlined />}></ButtonComponent>
+      <InputComponent
+        className="search-input"
+        size={size}
+        style={{ height: "46px" }}
+        placeholder={placeholder}
+        {...rests}
+      />
+      <ButtonComponent
+        className="search-button"
+        size={size}
+        style={{ height: "46px" }}
+        icon={<SearchOutlined />}
+      ></ButtonComponent>
     </div>
   );
 }

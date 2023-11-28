@@ -15,7 +15,7 @@ function CardComponent(props) {
     price,
     rating,
     type,
-    selled,
+    sold,
     id,
   } = props;
   const navigate = useNavigate();
@@ -29,21 +29,21 @@ function CardComponent(props) {
     <div className="card-component">
       <Card
         hoverable
-        style={{ width: "200px" }}
+        style={{ width: "200px", minHeight: "350px" }}
         bodyStyle={{ padding: "10px" }}
         onClick={() => handleDetailsProduct(id)}
-        cover={<img alt="example" src={image} />}
+        cover={<img className="anh" alt="example" src={image} />}
+        // disable={countInStock === 0 ? true : false}
       >
         <img className="logo-card-component" src={logo} alt="logo" />
         <div className="wrapper-card-component-name">{name}</div>
-
         <div className="description">
           {" "}
           <span>
             <span>{rating}</span>
             <StarFilled className="star" />
           </span>
-          <span> | Đã Bán {selled || 1000}+</span>
+          <span> | Đã Bán {sold || 100}+</span>
           <div className="cost">
             {convertPrice(price)}
             <span className="discount-product">- {discount || 5}%</span>

@@ -1,6 +1,16 @@
+.header-off-web{
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+}
 .login-user{
     font-size: 12px;
     cursor: pointer;
+}
+.logo-header{
+    width: 50%;
 }
 .container-header{
     display: flex;

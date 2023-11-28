@@ -1,11 +1,6 @@
-import TypeProduct from "../../TypeProduct/TypeProduct";
+import slogan from "../../assets/images/slogan.png";
 import React, { useEffect } from "react";
 import "./HomePage.css";
-import SliderComponent from "../../components/SliderComponent/SliderComponent";
-import slider1 from "../../assets/images/slider1.png";
-import slider2 from "../../assets/images/slider2.png";
-import slider3 from "../../assets/images/slider3.png";
-import slider4 from "../../assets/images/slider4.png";
 import CardComponent from "../../components/CardComponent/CardComponent";
 import ButtonComponent from "../../components/ButtonComponent/ButtonComponent";
 import { useQuery } from "@tanstack/react-query";
@@ -14,6 +9,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import Loading from "../../loading/loading";
 import useDebounce from "../../hook/useDebounce";
+import { useNavigate } from "react-router-dom";
+import { Image } from "antd";
 
 function HomePage() {
   const searchProduct = useSelector((state) => state?.product?.search);
@@ -49,41 +46,43 @@ function HomePage() {
     fetchAllTypeProduct();
   }, []);
 
+  const navigate = useNavigate();
+  const handleOnClick = () => {
+    navigate("/product");
+  };
   return (
     <Loading isLoading={isLoading || loading}>
       <div className="container-homepage">
-        <div className="wrapper-type-product-homepage">
-          {typeProducts.map((item, index) => {
-            return <TypeProduct name={item} key={index} />;
-          })}
+        <div className="wrapper-logo-product-homepage">
+          <Image src={slogan} alt="logo-login" preview={false} />
         </div>
         <div className="wrapper-container-homepage">
-          <SliderComponent arrImages={[slider1, slider2, slider3, slider4]} />
-        </div>
-        <div className="wrapper-card-component">
-          {products?.data?.map((product) => {
-            return (
-              <CardComponent
-                key={product._id}
-                countInStock={product.countInStock}
-                description={product.description}
-                discount={product.discount}
-                image={product.image}
-                name={product.name}
-                price={product.price}
-                rating={product.rating}
-                type={product.type}
-                selled={product.selled}
-                id={product._id}
-              />
-            );
-          })}
+          <div className="wrapper-card-component">
+            {products?.data?.map((product) => {
+              return (
+                <div key={product._id}>
+                  <CardComponent
+                    countInStock={product.countInStock}
+                    description={product.description}
+                    discount={product.discount}
+                    image={product.image}
+                    name={product.name}
+                    price={product.price}
+                    rating={product.rating}
+                    type={product.type}
+                    sold={product.sold}
+                    id={product._id}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className="wrapper-button-component">
           <ButtonComponent
             className="button-component"
             textButton="Xem Thêm"
-            onClick={() => setLimit((prev) => prev + 6)}
+            onClick={handleOnClick}
             disabled={
               products?.total === products?.data?.length ||
               products?.totalPage === 1

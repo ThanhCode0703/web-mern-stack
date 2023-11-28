@@ -10,6 +10,7 @@ import { Menu, Switch } from "antd";
 import { getItem } from "../../utils";
 import AdminUser from "../../components/AdminUser/AdminUser";
 import AdminProduct from "../../components/AdminProduct/AdminProduct";
+import AdminOrder from "../../components/AdminOrder/AdminOrder";
 
 const items = [
   getItem("", ""),
@@ -34,7 +35,7 @@ function AdminPage() {
       case "product":
         return <AdminProduct />;
       default:
-        return;
+        return <AdminOrder />;
     }
   };
   return (

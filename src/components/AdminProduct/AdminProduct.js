@@ -2,7 +2,7 @@ import TableComponent from "../Table/TableComponent";
 import ButtonComponent from "../ButtonComponent/ButtonComponent";
 import { useEffect, useRef, useState } from "react";
 import * as message from "../../message/message";
-
+import { toast } from "react-toastify";
 import {
   SearchOutlined,
   UploadOutlined,
@@ -120,6 +120,7 @@ function AdminProduct() {
         image: res?.data?.image,
         countInStock: res?.data?.countInStock,
         discount: res?.data?.discount,
+        sold: res?.data?.sold,
       });
     }
     setIsLoadingUpdate(false);
@@ -404,6 +405,8 @@ function AdminProduct() {
         },
       }
     );
+    setIsModalOpenDelete(false);
+    toast.success("Xóa sản phẩm thành công!");
   };
 
   const handleDeleteMultipleProducts = (ids) => {

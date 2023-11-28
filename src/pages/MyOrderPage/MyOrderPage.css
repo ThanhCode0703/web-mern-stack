@@ -1,0 +1,95 @@
+.my-order-page-container{
+    margin-top: 85px;
+}
+.my-order-page-container-lv2{
+    height: 100%; 
+    width: 1270px; 
+    margin: 0 auto;
+}
+.wrapper-header-items-orders{
+    display: flex;
+    align-items:flex-start;
+    height: 90px;
+    width: 100%;
+}
+/* list order */
+.wrapper-list-order{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 20px;
+}
+/* item order */
+.wrapper-items-order{
+    display: flex;
+    align-items: center;
+    padding: 9px 16px;
+    background: #fff;
+    margin-top: 12px;
+    flex-direction: column;
+    width: 950px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 12px 12px #ccc;
+}
+/* status */
+.wrapper-status-orders{
+    display:flex;
+    align-items:flex-start;
+    width: 100%;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(235, 235, 240);
+    flex-direction:column;
+}
+
+/* footer items */
+.wrapper-footer-item{
+    display: flex;
+    flex-direction : column;
+    gap: 10px;
+    border-top: 1px solid rgb(235, 235, 240);
+    width: 100%;
+    align-items:flex-end;
+    padding-top: 10px;
+}
+
+.cancel-btn-order{
+    height: 36px;
+    border: 1px solid #9255FD;
+    border-radius: 4px;
+}
+
+/* xem chi tiết hóa đơn */
+.show-details-order{
+    height: 36px;
+    border: 1px solid #9255FD;
+    border-radius: 4px;
+    color: #9255FD; 
+    font-size: 14px; 
+}
+.name-items-order-myorder{
+    width: 260;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 25px;
+    margin-left: 20px;
+}
+.image-items-order-myorder{
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid rgb(238, 238, 238);
+    padding: 2px;
+    
+}
+.price-items-order-myorder{
+    font-size: 13px; 
+    color: rgb(254, 56, 52);
+    font-weight: 700;
+    margin-left: auto;
+    margin-top: 25px;
+}
