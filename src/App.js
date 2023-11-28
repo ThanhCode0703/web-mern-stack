@@ -4,13 +4,12 @@ import { routes } from "./routes";
 import DefaultComponent from "./components/DefaultComponent/DefaultComponent";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import { useQueries, useQuery } from "@tanstack/react-query";
 import * as UserService from "./service/UserService";
 import { isJsonString } from "./utils";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "./redux/slides/userSlide";
 import Loading from "./loading/loading";
 import { ToastContainer } from "react-toastify";
+import { resetUser, updateUser } from "./redux/slides/userSlide";
 function App() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -39,9 +38,16 @@ function App() {
       // Do something before request is sent
       const currentTime = new Date();
       const { decoded } = handleDecoded();
+      let storageRefreshToken = localStorage.getItem("refresh_token");
+      const refreshToken = JSON.parse(storageRefreshToken);
+      const decodedRefreshToken = jwt_decode(refreshToken);
       if (decoded?.exp < currentTime.getTime() / 1000) {
-        const data = await UserService.refreshToken();
-        config.headers["token"] = `Bearer ${data?.access_token}`;
+        if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+          const data = await UserService.refreshToken();
+          config.headers["token"] = `Bearer ${data?.access_token}`;
+        } else {
+          dispatch(resetUser());
+        }
       }
       return config;
     },
@@ -52,9 +58,11 @@ function App() {
   );
 
   const handleGetDetailsUser = async (id, token) => {
+    let storageRefreshToken = localStorage.getItem("refresh_token");
+    const refreshToken = JSON.parse(storageRefreshToken);
     const res = await UserService.getDetailUser(id, token);
 
-    dispatch(updateUser({ ...res?.data, access_token: token }));
+    dispatch(updateUser({ ...res?.data, access_token: token, refreshToken }));
     setIsLoading(false);
   };
   return (

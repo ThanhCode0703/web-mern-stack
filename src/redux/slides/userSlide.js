@@ -27,6 +27,7 @@ export const userSlide = createSlice({
         isAdmin = false,
         access_token = "",
         city = "",
+        refreshToken = "",
       } = action.payload;
       state.name = name;
       state.email = email;
@@ -37,6 +38,7 @@ export const userSlide = createSlice({
       state.isAdmin = isAdmin;
       state.access_token = access_token;
       state.city = city;
+      state.refreshToken = refreshToken;
     },
     resetUser: (state) => {
       state.name = "";
@@ -48,6 +50,7 @@ export const userSlide = createSlice({
       state.isAdmin = false;
       state.access_token = "";
       state.city = "";
+      state.refreshToken = "";
     },
   },
 });
