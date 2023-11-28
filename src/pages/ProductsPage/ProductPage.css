@@ -1,0 +1,12 @@
+.wrapper-type-product-homepage {
+    display: flex;
+    gap: 5px;
+    height: 44px;
+    font-weight: 600;
+    margin-top: 40px;
+    padding-left: 400px;
+}
+.background-image{
+    display: flex;
+    justify-content: center;
+}

@@ -46,10 +46,7 @@ function TypeProductPage() {
       <div className="container-type-product-page">
         <div className="wrapper-type-product-page">
           <Row>
-            {/* <Col className="card-type" span={4}>
-              {/* <NavbarComponent /> */}
-            {/* </Col> */}
-            <Col span={14}>
+            <Col span={24}>
               <div className="wrapper-type-card-component">
                 {products
                   ?.filter((pro) => {

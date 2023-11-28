@@ -17,7 +17,7 @@ const OrderSuccessPage = () => {
               <span className="label-payment-success">
                 Phương thức giao hàng
               </span>
-              <div className="payment-success-lable">
+              <div className="payment-success-4">
                 <span>{orderConstant.delivery[state?.delivery]}</span>
               </div>
             </div>

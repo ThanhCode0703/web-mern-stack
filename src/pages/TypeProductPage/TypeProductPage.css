@@ -1,13 +1,14 @@
 .container-type-product-page{
-    background-color: #ccc;
+    background-color:  #9C836B;
     /* background: #efefef; */
-    height: 2000px;
+    /* height: 2000px; */
+    display: flex;
+    justify-content: center;
 
 }
-.wrapper-type-product-page{
-    margin: 0 120px;
-    height: 100%;
-}
+/* .wrapper-type-product-page{
+
+} */
 .card-type{
     margin-top: 20px;
     border-radius: 10px;

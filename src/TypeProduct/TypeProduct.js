@@ -17,7 +17,7 @@ function TypeProduct({ name, typeProduct }) {
   return (
     <div>
       <ButtonComponent
-        className="type-product-name"
+        className="type-product-name text-capitalize"
         textButton={name}
         onClick={() => handleNavigateType(name)}
       />

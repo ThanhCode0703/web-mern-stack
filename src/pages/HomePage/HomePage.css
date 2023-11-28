@@ -22,7 +22,6 @@ pg-img {
 .wrapper-container-homepage {
   position: relative;
   padding-left: 424px;
-  padding-top: 140px;
   padding-right: 200px; /* Thêm thuộc tính position: relative; */
 }
 

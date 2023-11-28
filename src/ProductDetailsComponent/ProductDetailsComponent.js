@@ -1,9 +1,5 @@
 import { Col, Image, InputNumber, Rate, Row } from "antd";
 import React, { useState } from "react";
-import SmallBanhTrungThu1 from "../assets/images/smallbanhtrungthu1.png";
-import SmallBanhTrungThu2 from "../assets/images/smallbanhtrungthu2.png";
-import SmallBanhTrungThu3 from "../assets/images/smallbanhtrungthu3.png";
-import SmallBanhTrungThu4 from "../assets/images/smallbanhtrungthu4.png";
 import "./ProductDetailsComponent.css";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import * as ProductService from "../service/ProductService";
@@ -59,13 +55,15 @@ function ProductDetailsComponent(idProduct) {
     <Loading isLoading={isLoading}>
       <div className="container-product-details">
         <Row className="wrapper-product-details">
-          <Col span={10}>
-            <Image
-              className="product-image"
-              src={productsDetails?.data?.image}
-              alt="banh trung thu"
-              preview={false}
-            />
+          <Col span={6} className="wrapper-product-details-img">
+            <div>
+              <Image
+                className="product-image"
+                src={productsDetails?.data?.image}
+                alt="banh trung thu"
+                preview={false}
+              />
+            </div>
             {/* <Row className="small-image">
               <Col span={4}>
                 <Image
@@ -111,81 +109,80 @@ function ProductDetailsComponent(idProduct) {
               </Col>
             </Row> */}
           </Col>
-          <Col span={14}>
-            <div className="wrapper-style-name-product">
-              {productsDetails?.data?.name}
-            </div>
-            <div className="style-star">
-              <Rate
-                allowHalf
-                defaultValue={productsDetails?.data?.rating}
-                value={productsDetails?.data?.rating}
-              />
+          <Col span={18}>
+            <div className="container-details-price">
+              <div className="wrapper-style-name-product">
+                {productsDetails?.data?.name}
+              </div>
+              <div className="style-star">
+                <Rate
+                  allowHalf
+                  defaultValue={productsDetails?.data?.rating}
+                  value={productsDetails?.data?.rating}
+                />
 
-              <span className="navbar-view-evalute"> | Đã Bán 1000+</span>
-            </div>
-            <Row>
-              <Col span={16}>
-                <div className="wrapper-price">
-                  <div className="flash-sale-price">
-                    <span>{convertPrice(productsDetails?.data?.price)}</span>
-                    <div className="sale">
-                      <span className="list-sale">686.000₫</span>
-                      <span className="discount-product-details">
-                        -{productsDetails?.data?.discount}
-                      </span>
-                    </div>
+                <span className="navbar-view-evalute"> | Đã Bán 1000+</span>
+              </div>
+
+              <div className="wrapper-price">
+                <div className="flash-sale-price">
+                  <span>{convertPrice(productsDetails?.data?.price)}</span>
+                  <div className="sale">
+                    <span className="list-sale"> Giảm giá </span>
+                    <span className="discount-product-details">
+                      - {productsDetails?.data?.discount} %
+                    </span>
                   </div>
                 </div>
-                <div className="wrapper-address-product">
-                  <span> Giao tới </span>
-                  <span className="address">{user.address}</span>-
-                  <span className="address-change"> Đổi địa chỉ </span>
-                </div>
-                <div className="wrapper-quality-product">
-                  <p className="lable"> Số lượng </p>
-                  <div className="wrapper-button">
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => setNumProduct(numProduct - 1)}
-                    >
-                      <MinusOutlined />
-                    </button>
-                    <button className="btn btn-light">
-                      <InputNumber
-                        className="input-product"
-                        value={numProduct > 0 ? numProduct : setNumProduct(1)}
-                        // min={1}
-                        // max={10}
-                        // defaultValue={3}
-                        onChange={onChange}
-                      />
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn-secondary"
-                      onClick={() => setNumProduct(numProduct + 1)}
-                    >
-                      <PlusOutlined />
-                    </button>
-                  </div>
-                </div>
-                <div className="group-button">
+              </div>
+              <div className="wrapper-address-product">
+                <span> Giao tới :</span>
+                <span className="address">{user.address}</span> -
+                <span className="address-change"> Đổi địa chỉ </span>
+              </div>
+              <div className="wrapper-quality-product">
+                <div className="wrapper-button-quantity">
                   <button
                     type="button"
-                    className="btn btn-lg button-buy"
-                    onClick={handleAddOderProduct}
+                    className="btn btn-secondary"
+                    onClick={() => setNumProduct(numProduct - 1)}
                   >
-                    Chọn Mua
+                    <MinusOutlined />
                   </button>
-                  <button type="button" className="btn btn-lg button-buy0">
-                    Mua trước trả sau
-                    <p className="interest-rate"> lãi suất 0%</p>
+
+                  <InputNumber
+                    className="input-product"
+                    value={numProduct > 0 ? numProduct : setNumProduct(1)}
+                    // min={1}
+                    // max={10}
+
+                    // defaultValue={3}
+                    onChange={onChange}
+                  />
+
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setNumProduct(numProduct + 1)}
+                  >
+                    <PlusOutlined />
                   </button>
                 </div>
-              </Col>
-            </Row>
+              </div>
+              <div className="group-button">
+                <button
+                  type="button"
+                  className="btn btn-lg button-buy"
+                  onClick={handleAddOderProduct}
+                >
+                  Chọn Mua
+                </button>
+                <button type="button" className="btn btn-lg button-buy0">
+                  Mua trước trả sau
+                  <p className="interest-rate"> lãi suất 0%</p>
+                </button>
+              </div>
+            </div>
           </Col>
         </Row>
       </div>

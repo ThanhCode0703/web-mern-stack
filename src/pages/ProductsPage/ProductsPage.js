@@ -7,8 +7,8 @@ import * as ProductService from "../../service/ProductService";
 import CardComponent from "../../components/CardComponent/CardComponent";
 import { useQuery } from "@tanstack/react-query";
 import slider3 from "../../assets/images/slider3.png";
-import SliderComponent from "../../components/SliderComponent/SliderComponent";
-// import "./ProductPage.css";
+import "./ProductPage.css";
+import { Image } from "antd";
 
 function ProductsPage() {
   const searchProduct = useSelector((state) => state?.product?.search);
@@ -45,11 +45,8 @@ function ProductsPage() {
   return (
     <Loading isLoading={isLoading || loading}>
       <div className="container-homepage">
-        <div
-          className="background-image"
-          style={{ display: "flex", justifyContent: "center" }}
-        >
-          <SliderComponent arrImages={[slider3]} />
+        <div className="background-image">
+          <Image src={slider3} />
         </div>
         <div className="wrapper-type-product-homepage">
           {typeProducts.map((item, index) => {

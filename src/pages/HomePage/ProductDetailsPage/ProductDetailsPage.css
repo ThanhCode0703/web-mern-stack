@@ -1,6 +1,9 @@
 .container-product-details-page{
-    background-color: #9C836B;
-    height: 1000px;
+    background-color:  #9C836B;
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
 }
 .wrapper-product-details-component{
     padding-top: 16px;

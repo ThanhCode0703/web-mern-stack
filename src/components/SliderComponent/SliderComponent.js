@@ -13,19 +13,21 @@ function SliderComponent({ arrImages }) {
     autoplaySpeed: 2000,
   };
   return (
-    <Slider className="slider" {...settings}>
-      {arrImages.map((image, index) => {
-        return (
-          <Image
-            src={image}
-            alt="slider"
-            key={index}
-            preview={false}
-            width="90%"
-          />
-        );
-      })}
-    </Slider>
+    <div className="slider-container">
+      <Slider className="slider" {...settings}>
+        {arrImages.map((image, index) => {
+          return (
+            <Image
+              src={image}
+              alt="slider"
+              key={index}
+              preview={false}
+              width="100%"
+            />
+          );
+        })}
+      </Slider>
+    </div>
   );
 }
 
