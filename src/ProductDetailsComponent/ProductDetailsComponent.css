@@ -150,3 +150,8 @@
 .interest-rate{
     font-size: 11px;
 }
+.fb-comment-details-page{
+    width: 1270px;
+    margin-top: 30px;
+    border-top: 1px solid #000;
+}

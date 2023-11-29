@@ -9,6 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { convertPrice } from "../utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addOrderProduct } from "../redux/slides/orderSlide";
+import LikeButton from "../components/LikeButton/LikeButton";
+import Comments from "../components/Comments/Comments";
 
 function ProductDetailsComponent(idProduct) {
   const [numProduct, setNumProduct] = useState(1);
@@ -140,7 +142,9 @@ function ProductDetailsComponent(idProduct) {
                 <span className="address">{user.address}</span> -
                 <span className="address-change"> Đổi địa chỉ </span>
               </div>
+              <LikeButton />
               <div className="wrapper-quality-product">
+                <p>Số lượng</p>
                 <div className="wrapper-button-quantity">
                   <button
                     type="button"
@@ -184,6 +188,9 @@ function ProductDetailsComponent(idProduct) {
               </div>
             </div>
           </Col>
+          <div className="fb-comment-details-page">
+            <Comments />
+          </div>
         </Row>
       </div>
     </Loading>
