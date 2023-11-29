@@ -13,7 +13,6 @@ function LikeButton(props) {
         data-size=""
         data-share="true"
       ></div>
-      ;
     </div>
   );
 }

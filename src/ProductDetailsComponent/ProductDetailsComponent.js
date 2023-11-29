@@ -1,12 +1,12 @@
 import { Col, Image, InputNumber, Rate, Row } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductDetailsComponent.css";
 import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import * as ProductService from "../service/ProductService";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../loading/loading";
 import { useDispatch, useSelector } from "react-redux";
-import { convertPrice } from "../utils";
+import { convertPrice, initFacebookSDK } from "../utils";
 import { useLocation, useNavigate } from "react-router-dom";
 import { addOrderProduct } from "../redux/slides/orderSlide";
 import LikeButton from "../components/LikeButton/LikeButton";
@@ -27,6 +27,10 @@ function ProductDetailsComponent(idProduct) {
     const res = await ProductService.getDetailProduct(id);
     return res;
   };
+  useEffect(() => {
+    initFacebookSDK();
+  }, []);
+  console.log("123", location);
 
   const { isLoading, data: productsDetails } = useQuery(
     ["product-details", idProduct],
@@ -189,7 +193,7 @@ function ProductDetailsComponent(idProduct) {
             </div>
           </Col>
           <div className="fb-comment-details-page">
-            <Comments />
+            <Comments linkCmt={location.pathname} />
           </div>
         </Row>
       </div>
