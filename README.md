@@ -1,12 +1,15 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+# Font-End of web E-COMMERCE
+<div>
+   <a href="https://web-mern-stack.vercel.app/" target="blank"><img align="center" src="https://img.shields.io/badge/Demo Github-000000?style=for-the-badge&logo=github&logoColor=white" alt="Demo Github"/></a>
 ## Available Scripts
 
 In the project directory, you can run:
 
+### `npm i`
 ### `npm start`
+And project will be run full option when you run both font-end & back-end 
+Link back-end 
+### `https://github.com/ThanhCode0703/backend-mern-stack`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,57 +17,42 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+## `Web Interface`
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/ba7b42d0-6349-407b-a7eb-327344dca0de)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### `Click button XEM THÊM`
+## `Product Interface`
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/324bc482-3cd1-456e-a784-148c37f7e309)
 
-### `npm run build`
+## `Type Product ` will be render from your data to interface
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/b85d7b31-1b1f-49dd-8632-5ee4638ea58b)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## `Product Detail Interface`
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/36e62d4a-74c7-4f7c-b51c-377e02f4ff00)
+### have a cmt, like, share of Facebook
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## `Payment Interface`
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/b5c3b274-2a26-4a48-8a65-18686eacacfd)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### have a Payment with cash and PayPal
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/0a4b7af1-961f-41e0-8825-dfe169698419)
 
-### `npm run eject`
+## `Admin Interface`
+### `Admin User`
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/9b109b4a-8899-46fc-93d0-5156b309982b)
+### `Admin Product`
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/2bdcc08e-bd42-475d-83d6-3bcb60b5b82c)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### `Admin Order`
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/1d26fe5d-037b-4063-a18b-e23031e9df73)
+#### ` Chart Of Admin Order"
+![image](https://github.com/ThanhCode0703/web-mern-stack/assets/91969482/c54f1a2f-8b89-47b8-9e50-6adec1b28b2e)
+Chart representing the ratio of online payments and payments via PayPal.
+## Summary
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+If you like my project, please share it with your friends.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
